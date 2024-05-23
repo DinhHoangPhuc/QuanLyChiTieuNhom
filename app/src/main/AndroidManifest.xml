@@ -13,13 +13,13 @@
         android:theme="@style/Theme.QuanLyChiTieuNhom"
         tools:targetApi="31">
         <activity
-            android:name=".ThongKe"
+            android:name=".Phuc.ThongKe"
             android:exported="false" />
         <activity
-            android:name=".DangKy"
+            android:name=".Phuc.DangKy"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".Phuc.DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Phuc.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

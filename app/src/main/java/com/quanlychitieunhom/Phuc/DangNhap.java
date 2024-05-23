@@ -1,4 +1,4 @@
-package com.quanlychitieunhom;
+package com.quanlychitieunhom.Phuc;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +11,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.quanlychitieunhom.R;
+
 public class DangNhap extends AppCompatActivity {
 
     TextView txtQuenMatKhau;
     TextView txtDangKy;
     Button btnDangNhap;
+
+    TextView txtThongKe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +42,18 @@ public class DangNhap extends AppCompatActivity {
             Intent intent = new Intent(DangNhap.this, DangKy.class);
             startActivity(intent);
         });
+
+        txtThongKe.setOnClickListener(v -> {
+            Intent intent = new Intent(DangNhap.this, ThongKe.class);
+            startActivity(intent);
+        });
     }
 
     void getControl(){
         txtQuenMatKhau = findViewById(R.id.tvForgotPassword);
         txtDangKy = findViewById(R.id.tvSignUp);
         btnDangNhap = findViewById(R.id.btnDangNhap);
+
+        txtThongKe = findViewById(R.id.tvThongKe);
     }
 }
