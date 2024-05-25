@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuanLyChiTieuNhom</string>
+    <string name="open_nav">Open Nav"</string>
+    <string name="close_nav">Close Nav"</string>
 </resources>
