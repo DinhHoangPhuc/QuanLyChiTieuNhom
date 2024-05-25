@@ -45,6 +45,7 @@ public class Chi extends AppCompatActivity {
         ivAnhChi = findViewById(R.id.iv_anh_chi);
         btnLuuChi = findViewById(R.id.btn_luu_chi);
 
+        //bấm nút btn chọn sẽ hien bang chọn so tien
         btnSoTienChi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
