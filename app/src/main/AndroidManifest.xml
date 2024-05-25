@@ -13,6 +13,15 @@
         android:theme="@style/Theme.QuanLyChiTieuNhom"
         tools:targetApi="31">
         <activity
+            android:name=".Ngan.TVMdong"
+            android:exported="false" />
+        <activity
+            android:name=".Ngan.HoanTien"
+            android:exported="false" />
+        <activity
+            android:name=".Ngan.ChiaDeu"
+            android:exported="false" />
+        <activity
             android:name=".Phuc.ThongKe"
             android:exported="false" />
         <activity
