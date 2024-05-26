@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Danh sách nhóm của bạn"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:id="@+id/lvDanhSachNhom"
+        android:layout_width="match_parent"
+        android:layout_height="314dp" />
+
+    <Button
+        android:id="@+id/btn_TaoNhom"
+        android:background="@color/teal_200"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Tạo nhóm mới" />
+
+    <Button
+        android:id="@+id/btn_ThamGiaNhomURL"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        android:textColor="@color/white"
+        android:text="Tham gia nhóm bằng URL" />
+    <Button
+        android:id="@+id/btn_ThamGiaNhomQR"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        android:textColor="@color/white"
+        android:text="Tham gia nhóm bằng QR" />
+</LinearLayout>

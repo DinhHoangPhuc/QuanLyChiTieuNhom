@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/QuanLyChiTieu"
+            android:title="Quản lý chi tiêu">
+            <menu>
+                <item
+                    android:id="@+id/NhapThu"
+                    android:icon="@drawable/ic_launcher_foreground"
+                    android:title="Nhập thu"/>
+                <item
+                    android:id="@+id/NhapChi"
+                    android:icon="@drawable/ic_launcher_foreground"
+                    android:title="Nhập chi"/>
+                <item
+                    android:id="@+id/ChiaTien"
+                    android:icon="@drawable/ic_launcher_foreground"
+                    android:title="Tính tiền chia đều cho từng thành viên"/>
+                <item
+                    android:id="@+id/NopTienVaoNhom"
+                    android:icon="@drawable/ic_launcher_foreground"
+                    android:title="Số tiền quỹ phải nộp khi vào nhóm"/>
+                <item
+                    android:id="@+id/ChiaTienGiaiTan"
+                    android:icon="@drawable/ic_launcher_foreground"
+                    android:title="Tính tiền của thành viên khi nhóm giải tán"/>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item
+            android:id="@+id/QuanLyThanhVien"
+            android:title="Quản lý thành viên">
+            <menu>
+                <item
+                    android:id="@+id/TaoLoiMoi"
+                    android:icon="@drawable/ic_launcher_foreground"
+                    android:title="Tạo lời mời vào nhóm"/>
+
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item
+            android:id="@+id/QuanLyQuy"
+            android:title="Quản lý quỹ"
+            android:icon="@drawable/ic_launcher_foreground">
+            <menu >
+                <item
+                    android:id="@+id/ThongBaoDenThanhVien"
+                    android:title="Tạo thông báo đóng tiền đến các thành viên"
+                    android:icon="@drawable/ic_launcher_foreground"/>
+            </menu>
+        </item>
+    </group>
+</menu>
