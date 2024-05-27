@@ -17,8 +17,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/imgHinhNhom"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_height="100dp" />
         <TextView
             android:id="@+id/tvTenNhom"
             android:layout_width="wrap_content"

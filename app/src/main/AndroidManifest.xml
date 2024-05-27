@@ -16,6 +16,9 @@
             android:name=".Thai.DanhSachNhom"
             android:exported="true" />
         <activity
+            android:name=".Thai.TrangChuTruongNhom"
+            android:exported="true" />
+        <activity
             android:name=".Phuc.ThongKe"
             android:exported="false" />
         <activity
