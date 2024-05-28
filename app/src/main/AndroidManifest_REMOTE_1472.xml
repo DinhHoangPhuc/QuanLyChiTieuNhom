@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<<<<<<< HEAD
-=======
 
->>>>>>> main
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,8 +15,6 @@
         android:theme="@style/Theme.QuanLyChiTieuNhom"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
-=======
             android:name=".Ngan.TVMdong"
             android:exported="false" />
         <activity
@@ -29,7 +24,6 @@
             android:name=".Ngan.ChiaDeu"
             android:exported="false" />
         <activity
->>>>>>> main
             android:name=".Tuyen.Chi"
             android:exported="false" />
         <activity
