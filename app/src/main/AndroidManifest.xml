@@ -29,18 +29,33 @@
         <activity
             android:name=".Tuyen.Thu"
             android:exported="false" />
-        <activ
+        <activity
             android:name=".Thai.DanhSachNhom"
             android:exported="true" />
         <activity
             android:name=".Thai.TrangChuTruongNhom"
             android:exported="true" />
         <activity
+            android:name=".QuocAnh.CreateGroup"
+            android:exported="true" />
+        <activity
+            android:name=".QuocAnh.invite_link"
+            android:exported="true" />
+        <activity
+            android:name=".QuocAnh.Invite_QR"
+            android:exported="true" />
+        <activity
+            android:name=".QuocAnh.NatigationRIght"
+            android:exported="true" />
+        <activity
+            android:name=".QuocAnh.Notification"
+            android:exported="true" />
+        <activity
             android:name=".Phuc.ThongKe"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Phuc.DangKy"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Phuc.DangNhap"
             android:exported="true">
