@@ -130,5 +130,9 @@ public class Chi extends AppCompatActivity {
         // Thực hiện lưu thông tin
         Toast.makeText(this, "Lưu thông tin thành công!", Toast.LENGTH_SHORT).show();
     }
+<<<<<<< HEAD
+}
+=======
 }
 
+>>>>>>> main

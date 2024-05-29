@@ -19,8 +19,6 @@ public class DangNhap extends AppCompatActivity {
     TextView txtDangKy;
     Button btnDangNhap;
 
-    TextView txtThongKe;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,18 +40,11 @@ public class DangNhap extends AppCompatActivity {
             Intent intent = new Intent(DangNhap.this, DangKy.class);
             startActivity(intent);
         });
-
-        txtThongKe.setOnClickListener(v -> {
-            Intent intent = new Intent(DangNhap.this, ThongKe.class);
-            startActivity(intent);
-        });
     }
 
     void getControl(){
         txtQuenMatKhau = findViewById(R.id.tvForgotPassword);
         txtDangKy = findViewById(R.id.tvSignUp);
         btnDangNhap = findViewById(R.id.btnDangNhap);
-
-        txtThongKe = findViewById(R.id.tvThongKe);
     }
 }
