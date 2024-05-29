@@ -5,6 +5,15 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+<<<<<<< HEAD
+=======
+      <SelectionState runConfigName="TrangChuTruongNhom">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="DanhSachNhom">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+>>>>>>> Thai
     </selectionStates>
   </component>
 </project>
