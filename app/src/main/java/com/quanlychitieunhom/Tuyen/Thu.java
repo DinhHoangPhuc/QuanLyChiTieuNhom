@@ -43,11 +43,7 @@ public class Thu extends AppCompatActivity {
         ivAnh = findViewById(R.id.iv_anh);
         btnLuu = findViewById(R.id.btn_luu);
 
-<<<<<<< HEAD
         //chọn icon số tiền để hiện bảng nhập số
-=======
-      //chọn icon số tiền để hiện bảng nhập số
->>>>>>> main
         btnSoTien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,11 +53,7 @@ public class Thu extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-        // chọn icon lịch để chọn ngày
-=======
    // chọn icon lịch để chọn ngày
->>>>>>> main
         btnChonNgay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,11 +61,7 @@ public class Thu extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-        //bấm vào hình ảnh để chọn ảnh
-=======
       //bấm vào hình ảnh để chọn ảnh
->>>>>>> main
         ivAnh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,8 +131,5 @@ public class Thu extends AppCompatActivity {
 
         Toast.makeText(this, "Lưu thông tin thành công!", Toast.LENGTH_SHORT).show();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main
+
