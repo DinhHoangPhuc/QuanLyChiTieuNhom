@@ -113,25 +113,7 @@
         android:inputType="textMultiLine"
         android:minLines="3" />
 
-    <!-- Ảnh -->
-    <TextView
-        android:id="@+id/textView_anh_chi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Ảnh"
-        android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/iv_anh_chi"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="16dp"
-        android:background="?attr/selectableItemBackground"
-        android:contentDescription="Thêm ảnh"
-        android:onClick="onImageClick"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_add_photo" />
 
     <!-- Nút Lưu -->
     <Button

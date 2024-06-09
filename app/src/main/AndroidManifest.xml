@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<<<<<<< HEAD
-=======
 
->>>>>>> main
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,24 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyChiTieuNhom"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
+
+
         <activity
-<<<<<<< HEAD
-=======
-            android:name=".Ngan.TVMdong"
+
+            android:name=".Tuyen.ChiActivity"
             android:exported="false" />
         <activity
-            android:name=".Ngan.HoanTien"
-            android:exported="false" />
-        <activity
-            android:name=".Ngan.ChiaDeu"
-            android:exported="false" />
-        <activity
->>>>>>> main
-            android:name=".Tuyen.Chi"
-            android:exported="false" />
-        <activity
-            android:name=".Tuyen.Thu"
+            android:name=".Tuyen.ThuActivity"
             android:exported="false" />
         <activity
             android:name=".Phuc.ThongKe"
