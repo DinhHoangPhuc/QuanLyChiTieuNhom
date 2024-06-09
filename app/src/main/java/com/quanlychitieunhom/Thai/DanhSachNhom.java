@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +22,13 @@ import com.quanlychitieunhom.R;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DanhSachNhom extends AppCompatActivity {
     ListView lvNhom;
-    Button taonhom, taianh;
+    Button taonhom,test;
     ArrayList<Nhom> lsNhom = new ArrayList<>();
     CustomAdapterDanhSachNhom customAdapterDanhSachNhom;
     @SuppressLint("MissingInflatedId")
@@ -37,24 +42,36 @@ public class DanhSachNhom extends AppCompatActivity {
     private void addControls(){
         taonhom = findViewById(R.id.btn_TaoNhom);
         lvNhom = findViewById(R.id.lvDanhSachNhom);
-        taianh = findViewById(R.id.btnChonHinhNen);
+        test = findViewById(R.id.btn_ThamGiaNhomQR);
     }
     private void addEvents(){
-        lsNhom.add(new Nhom(R.drawable.ic_launcher_foreground,"Thái","Nhóm trưởng"));
-
-        customAdapterDanhSachNhom = new CustomAdapterDanhSachNhom(DanhSachNhom.this,R.layout.layout_item_thanhvien, lsNhom);
-        lvNhom.setAdapter(customAdapterDanhSachNhom);
-        taonhom.setOnClickListener(new View.OnClickListener() {
+        test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomDialog();
+                CallApiNhom apiService = RetrofitClient.getClient("https://localhost:8080/").create(CallApiNhom.class);
+                Call<Nhom> call = apiService.getNhom();
+                call.enqueue(new Callback<Nhom>() {
+                    @Override
+                    public void onResponse(Call<Nhom> call, Response<Nhom> response) {
+                        Toast.makeText(DanhSachNhom.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                        lsNhom.add(new Nhom(R.drawable.ic_launcher_foreground,"Thái"));
+                        customAdapterDanhSachNhom = new CustomAdapterDanhSachNhom(DanhSachNhom.this,R.layout.layout_item_thanhvien, lsNhom);
+                        lvNhom.setAdapter(customAdapterDanhSachNhom);
+                    }
+                    @Override
+                    public void onFailure(Call<Nhom> call, Throwable t) {
+                        Toast.makeText(DanhSachNhom.this, "That bai", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
-        taianh.setOnClickListener(new View.OnClickListener() {
+
+        taonhom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(DanhSachNhom.this, ThemNhom.class);
+                startActivity(intent);
             }
         });
     }

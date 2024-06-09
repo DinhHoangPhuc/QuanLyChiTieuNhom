@@ -42,8 +42,7 @@ public class CustomAdapterDanhSachNhom extends BaseAdapter {
         avatar.setImageResource(thanhVien.getHinhNhom());
         TextView tvName = (TextView) rowView.findViewById(R.id.tvTenNhom);
         tvName.setText(thanhVien.getTenNhom());
-        TextView tvChucvu = (TextView) rowView.findViewById(R.id.tvChucVu);
-        tvChucvu.setText(thanhVien.getChucVu());
+
         return rowView;
     }
 }

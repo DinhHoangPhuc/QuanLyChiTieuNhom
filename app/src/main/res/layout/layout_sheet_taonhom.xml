@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -33,6 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hình nền" />
+
+    <ImageView
+        android:id="@+id/imgAnhNhom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
     <Button
         android:id="@+id/btnChonHinhNen"
         android:layout_margin="10dp"
@@ -52,7 +60,7 @@
             android:layout_weight="1"
             android:text="Đóng" />
         <Button
-            android:id="@+id/btnRoiNhom"
+            android:id="@+id/btnTaoNhom"
             android:textColor="@color/white"
             android:backgroundTint="#2196F3"
             android:layout_weight="1"
