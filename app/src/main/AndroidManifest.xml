@@ -13,22 +13,23 @@
         android:theme="@style/Theme.QuanLyChiTieuNhom"
         tools:targetApi="31">
         <activity
+            android:name=".Ngan.HoanTien"
+            android:exported="false" />
+        <activity
+            android:name=".Ngan.TVMDongTien"
+            android:exported="false" />
+        <activity
+            android:name=".Phuc.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".Phuc.ThongKe"
             android:exported="false" />
         <activity
             android:name=".Phuc.DangKy"
             android:exported="false" />
-        <activity
-            android:name=".Phuc.DangNhap"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
-            android:name=".Phuc.MainActivity"
+            android:name=".Ngan.ChiaDeu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
