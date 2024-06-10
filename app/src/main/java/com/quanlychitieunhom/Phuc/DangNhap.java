@@ -69,6 +69,13 @@ public class DangNhap extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        if(!token.isEmpty()) {
+            Intent intent = new Intent(DangNhap.this, TrangChu.class);
+            startActivity(intent);
+        }
     }
 
     void callLoginApi(String username, String password){
