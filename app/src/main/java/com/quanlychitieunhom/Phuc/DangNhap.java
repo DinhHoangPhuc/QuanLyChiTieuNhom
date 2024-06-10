@@ -65,7 +65,7 @@ public class DangNhap extends AppCompatActivity {
                 return;
             } else {
                 callLoginApi(edtTaiKhoan.getText().toString(), edtMatKhau.getText().toString());
-                Intent intent = new Intent(DangNhap.this, DanhSachNhom.class);
+                Intent intent = new Intent(DangNhap.this, TrangChu.class);
                 startActivity(intent);
             }
         });
