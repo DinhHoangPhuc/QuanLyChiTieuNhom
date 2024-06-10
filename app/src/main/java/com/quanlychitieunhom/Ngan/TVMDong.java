@@ -16,21 +16,22 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-public class HoanTien extends AppCompatActivity {
+
+public class TVMDong extends AppCompatActivity {
     private ApiService apiService;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_hoan_tien);
-        // Khởi tạo Retrofit Service Interface
+        setContentView(R.layout.activity_tvmdong);
+// Khởi tạo Retrofit Service Interface
         apiService = RetrofitClient.getClient().create(ApiService.class);
 
         // Khởi tạo Retrofit Service Interface
         apiService = RetrofitClient.getClient().create(ApiService.class);
 
-        // Gọi API khi activity được tạo
+        // Gọi API khi activity dc tạo
         callApi();
         callApi2();
     }
@@ -51,13 +52,13 @@ public class HoanTien extends AppCompatActivity {
                     }
                 } else {
                     // Xử lý khi API trả về lỗi
-                    Toast.makeText(HoanTien.this, "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TVMDong.this, "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // Xử lý khi gọi API thất bại
-                Toast.makeText(HoanTien.this, "Không thể kết nối đến máy chủ!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TVMDong.this, "Lỗi kết nối đến máy chủ!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -77,13 +78,13 @@ public class HoanTien extends AppCompatActivity {
                     }
                 } else {
                     // Xử lý khi API trả về lỗi
-                    Toast.makeText(HoanTien.this, "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TVMDong.this, "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // Xử lý khi gọi API thất bại
-                Toast.makeText(HoanTien.this, "Không thể kết nối đến máy chủ!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TVMDong.this, "Lỗi kết nối đến máy chủ!", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,9 +21,9 @@
         android:layout_alignBottom="@+id/top_view"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="147dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginEnd="143dp"
+        android:layout_marginBottom="42dp"
         android:text="Chia đều"
         android:textColor="@color/white"
         android:textSize="30dp"
@@ -51,17 +50,18 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/text_tienHientai"
+            android:id="@+id/tv_tienHientai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="10dp"
-            android:text="2,500,000"
+
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            tools:ignore="SpeakableTextPresentCheck" />
         <ImageView
             android:id="@+id/line"
             android:background="@drawable/ic_line"
@@ -78,20 +78,21 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Số tiền sau khi chia:"
+            android:text="Số tiền mỗi người nhận được:"
             android:textAlignment="center"
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/text_chiadeu"
+            android:id="@+id/tv_chiadeu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="500,000"
+
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 </RelativeLayout>
