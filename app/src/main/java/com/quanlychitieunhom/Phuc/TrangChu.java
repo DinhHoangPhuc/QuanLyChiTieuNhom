@@ -17,6 +17,7 @@ import com.quanlychitieunhom.R;
 public class TrangChu extends AppCompatActivity {
 
     Button btnThongKe;
+    Button btnThongKeThang;
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
 
@@ -37,11 +38,16 @@ public class TrangChu extends AppCompatActivity {
             Intent intent = new Intent(TrangChu.this, ThongKe.class);
             startActivity(intent);
         });
+
+        btnThongKeThang.setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ThongkeChiThangFragment()).commit();
+        });
     }
 
     private void getCOntrol() {
         btnThongKe = findViewById(R.id.btnThongKe);
         frameLayout = findViewById(R.id.fragment_container);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        btnThongKeThang = findViewById(R.id.btnThongKeThang);
     }
 }
