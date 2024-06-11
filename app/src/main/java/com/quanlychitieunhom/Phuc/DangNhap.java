@@ -88,6 +88,7 @@ public class DangNhap extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         String token = response.optString("token");
+                        String username = response.optString("username");
                         String error = response.optString("error");
                         if(!token.isEmpty()) {
                             Toast.makeText(DangNhap.this, token, Toast.LENGTH_LONG).show();
@@ -97,8 +98,10 @@ public class DangNhap extends AppCompatActivity {
                             sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
                             editor = sharedPreferences.edit();
                             editor.putString("token", token);
+                            editor.putString("username", username);
                             editor.apply();
                             editor.commit();
+                            Toast.makeText(DangNhap.this, username, Toast.LENGTH_LONG).show();
 //                                Toast.makeText(DangKy.this, response.getString("message"), Toast.LENGTH_LONG).show();
                         } else if(!error.isEmpty()) {
                             Toast.makeText(DangNhap.this, error, Toast.LENGTH_LONG).show();
