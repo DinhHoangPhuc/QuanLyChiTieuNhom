@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Home"
+        android:title="Trang chủ"
+        android:icon="@drawable/baseline_home_24" />
     <group>
         <item
             android:id="@+id/QuanLyChiTieu"
-            android:title="Quản lý chi tiêu">
+            android:title="Quản lý chi tiêu"
+            android:icon="@drawable/baseline_payments_24">
             <menu>
                 <item
                     android:id="@+id/NhapThu"
@@ -27,7 +32,8 @@
     <group>
         <item
             android:id="@+id/QuanLyThanhVien"
-            android:title="Quản lý thành viên">
+            android:title="Quản lý thành viên"
+            android:icon="@drawable/baseline_people_24">
             <menu>
                 <item
                     android:id="@+id/TaoLoiMoi"
@@ -39,7 +45,8 @@
     <group>
         <item
             android:id="@+id/QuanLyQuy"
-            android:title="Quản lý quỹ">
+            android:title="Quản lý quỹ"
+            android:icon="@drawable/baseline_payments_24">
             <menu >
                 <item
                     android:id="@+id/ThongBaoDenThanhVien"
@@ -50,7 +57,8 @@
     <group>
         <item
             android:id="@+id/ThongKe"
-            android:title="Thống kê">
+            android:title="Thống kê"
+            android:icon="@drawable/baseline_analytics_24">
             <menu>
                 <item
                     android:id="@+id/ThongKeThu"
@@ -64,7 +72,8 @@
     <group>
         <item
             android:id="@+id/ThongBao"
-            android:title="Thông báo">
+            android:title="Thông báo"
+            android:icon="@drawable/baseline_notifications_24">
             <menu>
                 <item
                     android:id="@+id/XemThongBao"

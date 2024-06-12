@@ -47,6 +47,7 @@ public class TrangChu extends AppCompatActivity {
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+        navigationView.setItemIconTintList(null);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if(item.getItemId() == R.id.NhapThu){
@@ -64,6 +65,8 @@ public class TrangChu extends AppCompatActivity {
         btnThongKeThang.setOnClickListener(v -> {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ThongkeChiThangFragment()).commit();
         });
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QuyFragment()).commit();
     }
 
     private void getCOntrol() {
