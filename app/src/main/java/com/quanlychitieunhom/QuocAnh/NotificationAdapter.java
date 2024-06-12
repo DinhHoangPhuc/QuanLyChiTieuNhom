@@ -17,7 +17,7 @@ import java.util.List;
 
 public class NotificationAdapter extends ArrayAdapter<NotificationClass> {
     Context context;
-    List arrayList;
+    List<NotificationClass> arrayList;
     int layout;
 
     public NotificationAdapter(@NonNull Context context, int layout,@NonNull List arrayList) {
