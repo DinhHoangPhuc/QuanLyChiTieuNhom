@@ -39,7 +39,7 @@
             android:name=".Ngan.ChiaDeu"
             android:exported="true" />
         <activity
-            android:name=".Tuyen.Chi"
+            android:name=".Tuyen.ChiFragment"
             android:exported="true" />
         <activity
             android:name=".Tuyen.ThuFragment"
