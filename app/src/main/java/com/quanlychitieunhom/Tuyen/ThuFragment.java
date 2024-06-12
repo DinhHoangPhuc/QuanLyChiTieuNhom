@@ -162,7 +162,7 @@ public class ThuFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String urlLuuThu = BASE_URL + "luu-thu/" + nhomId;
+        String urlLuuThu = BASE_URL + "taothu";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.POST, urlLuuThu, requestBody, new Response.Listener<JSONObject>() {

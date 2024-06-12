@@ -161,7 +161,7 @@ public class ChiFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String urlLuuChi = BASE_URL + "luu-chi/" + nhomId;
+        String urlLuuChi = BASE_URL + "them";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.POST, urlLuuChi, requestBody, new Response.Listener<JSONObject>() {
