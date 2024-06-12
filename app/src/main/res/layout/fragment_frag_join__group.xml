@@ -3,12 +3,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".QuocAnh.FragJoin_Group">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_200"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@null"
+                android:textStyle="bold"
+                android:background="@color/teal_200"
+                android:drawableLeft="@drawable/baseline_keyboard_backspace_24"
+                android:layout_weight="0" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Tham gia nhóm" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@null"
+                android:background="@color/teal_200"
+                android:layout_weight="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Đường dẫn" />
+
+            <EditText
+                android:id="@+id/edtDuongDan"
+                android:layout_width="match_parent"
+                android:backgroundTint="@null"
+                android:background="@drawable/text_box"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:drawablePadding="12dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="text"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnThamGia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_default"
+                android:text="Tham gia"/>
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

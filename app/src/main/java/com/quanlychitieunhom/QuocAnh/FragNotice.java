@@ -93,43 +93,43 @@ public class FragNotice extends Fragment {
         return view;
     }
 
-   public void loadDataToListView(String url, String token) {
-    new Thread(() -> {
-        try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .addHeader("Authorization", "Bearer " + token)
-                    .build();
+    public void loadDataToListView(String url, String token) {
+        new Thread(() -> {
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer " + token)
+                        .build();
 
-            Response response = client.newCall(request).execute();
+                Response response = client.newCall(request).execute();
 
-            if (response.isSuccessful()) {
-                String responseStr = response.body().string();
-                Gson gson = new Gson();
-                NotificationClass[] data = gson.fromJson(responseStr, NotificationClass[].class);
-                List<NotificationClass> dataArray = Arrays.asList(data);
-                Collections.sort(dataArray, new Comparator<NotificationClass>() {
-                    @Override
-                    public int compare(NotificationClass o1, NotificationClass o2) {
-                        return o1.getNgaytao().compareTo(o2.getNgaytao()); // nếu bạn muốn sắp xếp tăng dần
-                    }
-                });
+                if (response.isSuccessful()) {
+                    String responseStr = response.body().string();
+                    Gson gson = new Gson();
+                    NotificationClass[] data = gson.fromJson(responseStr, NotificationClass[].class);
+                    List<NotificationClass> dataArray = Arrays.asList(data);
+                    Collections.sort(dataArray, new Comparator<NotificationClass>() {
+                        @Override
+                        public int compare(NotificationClass o1, NotificationClass o2) {
+                            return o1.getNgaytao().compareTo(o2.getNgaytao()); // nếu bạn muốn sắp xếp tăng dần
+                        }
+                    });
+                    getActivity().runOnUiThread(() -> {
+                        NotificationAdapter adapter = new NotificationAdapter(getActivity(), R.layout.listview_notice, dataArray);
+                        lvNotifications.setAdapter(adapter);
+                        Toast.makeText(getActivity(), "Load data successful", Toast.LENGTH_SHORT).show();
+                    });
+                } else {
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Load data failed", Toast.LENGTH_SHORT).show());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 getActivity().runOnUiThread(() -> {
-                    NotificationAdapter adapter = new NotificationAdapter(getActivity(), R.layout.listview_notice, dataArray);
-                    lvNotifications.setAdapter(adapter);
-                    Toast.makeText(getActivity(), "Load data successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    textView.setText(e.getMessage());
                 });
-            } else {
-                getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Load data failed", Toast.LENGTH_SHORT).show());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            getActivity().runOnUiThread(() -> {
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                textView.setText(e.getMessage());
-            });
-        }
-    }).start();
-}
+        }).start();
+    }
 }
