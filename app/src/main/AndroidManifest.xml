@@ -18,43 +18,37 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Phuc.TrangChu"
-            android:exported="false" />
-        <activity
-            android:name=".Ngan.TVMdong"
-            android:exported="false" />
-        <activity
-            android:name=".Ngan.HoanTien"
-            android:exported="false" />
-        <activity
-            android:name=".Ngan.ChiaDeu"
-            android:exported="false" />
-        <activity
-            android:name=".Tuyen.Chi"
-            android:exported="false" />
-        <activity
-            android:name=".Tuyen.Thu"
-            android:exported="false" />
-        <activity
-            android:name=".Thai.DanhSachNhom"
+            android:name=".QuocAnh.Notificartion"
             android:exported="true" />
         <activity
-            android:name=".Thai.TrangChuTruongNhom"
-            android:exported="true" />
-        <activity
-            android:name=".QuocAnh.CreateGroup"
-            android:exported="true" />
-        <activity
-            android:name=".QuocAnh.invite_link"
+            android:name=".QuocAnh.Add_Notification"
             android:exported="true" />
         <activity
             android:name=".QuocAnh.Invite_QR"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.NatigationRIght"
+            android:name=".Phuc.TrangChu"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.Notification"
+            android:name=".Ngan.TVMdong"
+            android:exported="true" />
+        <activity
+            android:name=".Ngan.HoanTien"
+            android:exported="true" />
+        <activity
+            android:name=".Ngan.ChiaDeu"
+            android:exported="true" />
+        <activity
+            android:name=".Tuyen.Chi"
+            android:exported="true" />
+        <activity
+            android:name=".Tuyen.Thu"
+            android:exported="true" />
+        <activity
+            android:name=".Thai.DanhSachNhom"
+            android:exported="true" />
+        <activity
+            android:name=".Thai.TrangChuTruongNhom"
             android:exported="true" />
         <activity
             android:name=".Phuc.ThongKe"
@@ -64,15 +58,6 @@
             android:exported="true" />
         <activity
             android:name=".Phuc.DangNhap"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Phuc.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
