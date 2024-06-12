@@ -42,7 +42,7 @@
             android:name=".Tuyen.Chi"
             android:exported="true" />
         <activity
-            android:name=".Tuyen.Thu"
+            android:name=".Tuyen.ThuFragment"
             android:exported="true" />
         <activity
             android:name=".Thai.DanhSachNhom"
