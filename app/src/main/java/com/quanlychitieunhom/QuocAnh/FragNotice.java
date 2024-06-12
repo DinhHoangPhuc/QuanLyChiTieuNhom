@@ -32,7 +32,7 @@ import okhttp3.Response;
  * create an instance of this fragment.
  */
 public class FragNotice extends Fragment {
-    public static int nhomid = ;
+    public static int nhomid = 1;
     TextView tvMess;
     Button btnBack;
     ListView lvNotifications;
