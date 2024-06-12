@@ -47,4 +47,32 @@
             </menu>
         </item>
     </group>
+    <group>
+        <item
+            android:id="@+id/ThongKe"
+            android:title="Thống kê">
+            <menu>
+                <item
+                    android:id="@+id/ThongKeThu"
+                    android:title="Thống kê thu"/>
+                <item
+                    android:id="@+id/ThongKeChi"
+                    android:title="Thống kê chi"/>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item
+            android:id="@+id/ThongBao"
+            android:title="Thông báo">
+            <menu>
+                <item
+                    android:id="@+id/XemThongBao"
+                    android:title="Xem thông báo"/>
+                <item
+                    android:id="@+id/TaoThongbao"
+                    android:title="Tạo thông báo"/>
+            </menu>
+        </item>
+    </group>
 </menu>
