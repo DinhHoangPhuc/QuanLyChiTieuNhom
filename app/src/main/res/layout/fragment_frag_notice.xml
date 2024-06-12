@@ -47,11 +47,20 @@
                 app:backgroundTint="@null"
                 android:background="@color/teal_200" />
         </LinearLayout>
-
+        <TextView
+            android:background="@color/white"
+            android:id="@+id/tvMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="25dp"
+            android:visibility="gone" />
         <ListView
             android:id="@+id/lvNotification"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </FrameLayout>

@@ -27,6 +27,7 @@ import java.net.URL;
  * create an instance of this fragment.
  */
 public class FragAdd_Notice extends Fragment {
+    public static int nhomid = 2;
     Button btnAddNotification,btnBack;
     EditText edtTitle, edtContent;
     // TODO: Rename parameter arguments, choose names that match
@@ -97,9 +98,15 @@ public class FragAdd_Notice extends Fragment {
         return view;
     }
     public void addThongBao(String tieude, String noiDung, String ngaydang) {
-        if (tieude.isEmpty() || noiDung.isEmpty()) {
+        if (tieude.isEmpty() || noiDung.isEmpty() || tieude.length() > 40) {
             if (getActivity() != null) {
-                getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Không được để trống", Toast.LENGTH_SHORT).show());
+                getActivity().runOnUiThread(() -> {
+                    if (tieude.isEmpty() || noiDung.isEmpty()) {
+                        Toast.makeText(getActivity(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                    } else if (tieude.length() > 40) {
+                        Toast.makeText(getActivity(), "Tiêu đề không được nhập quá 40 kí tự", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             return;
         }
@@ -107,7 +114,7 @@ public class FragAdd_Notice extends Fragment {
         new Thread(() -> {
             try {
                 JSONObject newNotification = new JSONObject();
-                newNotification.put("nhomid", 1);
+                newNotification.put("nhomid", nhomid);
                 newNotification.put("tieude", tieude);
                 newNotification.put("noiDung", noiDung);
                 newNotification.put("ngaydang", ngaydang);

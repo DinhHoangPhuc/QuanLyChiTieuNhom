@@ -34,6 +34,8 @@ import java.io.IOException;
  * create an instance of this fragment.
  */
 public class FragInvite_QR extends Fragment {
+    public static int idnhom = 1;
+    String url ="http://localhost:8080/api/nhom/getnhomid?nhomid="+idnhom;
     Button btnSave,btnCoppy,btnBack;
     ImageView imgQR;
     // TODO: Rename parameter arguments, choose names that match
@@ -85,7 +87,7 @@ public class FragInvite_QR extends Fragment {
         btnCoppy = view.findViewById(R.id.btnCoppy);
         btnBack = view.findViewById(R.id.btnBack);
         imgQR = view.findViewById(R.id.imgQR);
-        Bitmap bitmap = generateQRCode("https://www.google.com");
+        Bitmap bitmap = generateQRCode(url);
         if(bitmap != null)
             imgQR.setImageBitmap(bitmap);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +100,7 @@ public class FragInvite_QR extends Fragment {
             @Override
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("label", "https://www.google.com");
+                ClipData clip = ClipData.newPlainText("label", url);
                 clipboard.setPrimaryClip(clip);
 
                 Toast.makeText(getActivity(), "Đã sao chép đường dẫn", Toast.LENGTH_SHORT).show();
