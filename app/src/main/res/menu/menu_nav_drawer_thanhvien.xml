@@ -4,7 +4,18 @@
     <group>
         <item
             android:id="@+id/ThongKeChiTieu"
+            android:icon="@drawable/baseline_monetization_on_24"
             android:title="Thống kê chi tiêu">
+        </item>
+        <item
+            android:id="@+id/NhapThu"
+            android:icon="@drawable/baseline_monetization_on_24"
+            android:title="Nhập thu">
+        </item>
+        <item
+            android:id="@+id/NhapChi"
+            android:icon="@drawable/baseline_monetization_on_24"
+            android:title="Nhập chi">
         </item>
     </group>
 </menu>

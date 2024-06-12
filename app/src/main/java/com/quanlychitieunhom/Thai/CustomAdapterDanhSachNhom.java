@@ -1,6 +1,7 @@
 package com.quanlychitieunhom.Thai;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,12 @@ public class CustomAdapterDanhSachNhom extends BaseAdapter {
             parent) {
         Nhom thanhVien = nhoms.get(position);
         View rowView = layoutInflater.inflate(layoutItem,null,true);
+        TextView tvId = (TextView) rowView.findViewById(R.id.tvIdNhom);
+        tvId.setText(String.valueOf(thanhVien.getId()));
         ImageView avatar = (ImageView) rowView.findViewById(R.id.imgAvatar);
-        avatar.setImageResource(thanhVien.getHinhNhom());
+        avatar.setImageURI(Uri.parse(thanhVien.getHinhNhom()));
         TextView tvName = (TextView) rowView.findViewById(R.id.tvTenNhom);
         tvName.setText(thanhVien.getTenNhom());
-
         return rowView;
     }
 }

@@ -4,12 +4,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/menu_nav_drawer_truongnhom"
-        app:headerLayout="@layout/header_nav_layout_truongnhom" />
+        app:headerLayout="@layout/header_nav_layout_menu"
+        app:menu="@menu/menu_nav_drawer_truongnhom" />
+
+    <FrameLayout
+        android:id="@+id/frameDyFrag"
+        android:background="#EAC9C9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 </LinearLayout>

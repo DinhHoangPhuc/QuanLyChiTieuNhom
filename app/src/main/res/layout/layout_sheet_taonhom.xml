@@ -9,6 +9,7 @@
     <TextView
         android:textSize="18sp"
         android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_medium"
         android:textStyle="bold"
         android:padding="10dp"
         android:layout_width="wrap_content"
@@ -18,6 +19,7 @@
     <TextView
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
         android:layout_height="wrap_content"
         android:text="Tên nhóm" />
 
@@ -27,45 +29,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
+        android:inputType="text" />
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_height="wrap_content"
+        android:text="Mô tả" />
+
+    <EditText
+        android:id="@+id/edtMoTa"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
         android:inputType="text" />
 
     <TextView
         android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
+        android:fontFamily="@font/montserrat_medium"
         android:layout_height="wrap_content"
         android:text="Hình nền" />
 
+    <Button
+        android:id="@+id/btnChonHinhNen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="#2196F3"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Chọn ảnh" />
+
     <ImageView
         android:id="@+id/imgAnhNhom"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    <Button
-        android:id="@+id/btnChonHinhNen"
-        android:layout_margin="10dp"
+    <ImageButton
+        android:id="@+id/btnTaoNhom"
         android:layout_width="wrap_content"
+        android:layout_gravity="right"
         android:layout_height="wrap_content"
-        android:text="Chọn ảnh" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnTuChoiRoiNhom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Đóng" />
-        <Button
-            android:id="@+id/btnTaoNhom"
-            android:textColor="@color/white"
-            android:backgroundTint="#2196F3"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thêm" />
-    </LinearLayout>
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/btn_arraw1" />
 </LinearLayout>
