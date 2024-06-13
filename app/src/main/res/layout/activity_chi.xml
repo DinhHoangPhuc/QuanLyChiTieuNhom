@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#039BE5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="Nhập số tiền chi"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_so_tien_chi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginLeft="60dp"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="@android:color/black" />
+
+            <ImageButton
+                android:id="@+id/btn_so_tien_chi"
+                android:layout_width="25dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="Nhập số tiền"
+                android:src="@drawable/ic_calculator" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_chon_ngay_chi"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Chọn ngày"
+            android:src="@drawable/ic_calendar" />
+
+        <EditText
+            android:id="@+id/et_ngay_chi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:clickable="false"
+            android:enabled="false"
+            android:focusable="false"
+            android:inputType="datetime"
+            android:padding="0dp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Ghi chú -->
+    <TextView
+        android:id="@+id/textView_ghi_chu_chi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:text="Ghi chú"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/et_ghi_chu_chi"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFFFFF"
+        android:gravity="top"
+        android:hint="viết ở đây..."
+        android:inputType="textMultiLine"
+        android:minLines="3" />
+
+    <!-- Ảnh -->
+    <TextView
+        android:id="@+id/textView_anh_chi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Ảnh"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/iv_anh_chi"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Thêm ảnh"
+        android:onClick="onImageClick"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_add_photo" />
+
+    <!-- Nút Lưu -->
+    <Button
+        android:id="@+id/btn_luu_chi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Lưu" />
+</LinearLayout>
