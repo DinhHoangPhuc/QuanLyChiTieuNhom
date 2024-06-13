@@ -114,7 +114,7 @@ public class FragAdd_Notice extends Fragment {
         new Thread(() -> {
             try {
                 JSONObject newNotification = new JSONObject();
-                newNotification.put("nhomid", nhomid);
+                newNotification.put("nhomid", DanhSachNhom.selectedItemId);
                 newNotification.put("tieude", tieude);
                 newNotification.put("noiDung", noiDung);
                 newNotification.put("ngaydang", ngaydang);

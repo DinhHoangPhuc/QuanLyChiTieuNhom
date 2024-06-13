@@ -35,7 +35,7 @@ import java.io.IOException;
  */
 public class FragInvite_QR extends Fragment {
     public static int idnhom = 1;
-    String url ="http://localhost:8080/api/nhom/getnhomid?nhomid="+idnhom;
+    String url ="http://localhost:8080/api/nhom/getnhomid?nhomid="+DanhSachNhom.selectedItemId;
     Button btnSave,btnCoppy,btnBack;
     ImageView imgQR;
     // TODO: Rename parameter arguments, choose names that match

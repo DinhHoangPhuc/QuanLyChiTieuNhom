@@ -90,7 +90,7 @@ public class FragNotice extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
         if(!token.isEmpty()) {
-            loadDataToListView("http://10.0.2.2:8080/api/thongbao/getThongBao?nhomId=" + nhomid, token);
+            loadDataToListView("http://10.0.2.2:8080/api/thongbao/getThongBao?nhomId=" + DanhSachNhom.selectedItemId, token);
         }
         return view;
     }
