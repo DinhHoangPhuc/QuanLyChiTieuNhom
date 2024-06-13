@@ -7,6 +7,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -70,7 +72,7 @@ public class TaoNhom extends Fragment {
 
     ImageButton btnTaoNhom;
     Uri mUri;
-    String urlTaoNhom = "http://192.168.1.10:8080/api/nhom/taoNhom";
+    String urlTaoNhom = "http://192.168.110.157:8080/api/nhom/taoNhom";
     private ActivityResultLauncher<Intent> mActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -196,26 +198,33 @@ public class TaoNhom extends Fragment {
     }
 
     private void ThemNhom(JSONObject jsonObject) {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlTaoNhom, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Thành công", Toast.LENGTH_SHORT).show();
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), imgAvatar.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
-                return headers;
-            }
-        };
-        requestQueue.add(jsonObjectRequest);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", AppCompatActivity.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        if (!token.isEmpty()) {
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlTaoNhom, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Toast.makeText(getActivity(), "Thành công", Toast.LENGTH_SHORT).show();
+                }
+            }, new com.android.volley.Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getActivity(), imgAvatar.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Authorization", "Bearer "+ token);
+                    return headers;
+                }
+            };
+            requestQueue.add(jsonObjectRequest);
+        }else {
+            Toast.makeText(getActivity(), "Lỗi token", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void onClickRequestPermission() {

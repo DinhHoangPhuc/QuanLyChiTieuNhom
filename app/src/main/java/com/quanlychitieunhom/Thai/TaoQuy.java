@@ -2,6 +2,7 @@ package com.quanlychitieunhom.Thai;
 
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -106,27 +108,34 @@ public class TaoQuy extends Fragment {
     }
 
     private void ThemQuy(JSONObject jsonObject) {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlTaoQuy, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Thành công", Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
-            }
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", AppCompatActivity.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        if(!token.isEmpty()) {
 
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjIwMTQ5LCJleHAiOjE3MTgzMDY1NDl9.D-mlxzg8hTyBcn3JvNjX7qeYFWz9eUfIj3woBqcNR2c926rWJkIbKrNzWiYsvLvi");
-                return headers;
-            }
-        };
-        requestQueue.add(jsonObjectRequest);
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlTaoQuy, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Toast.makeText(getActivity(), "Thành công", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
+                }
+
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Authorization", "Bearer "+ token);
+                    return headers;
+                }
+            };
+            requestQueue.add(jsonObjectRequest);
+        }else {
+            Toast.makeText(getActivity(), "Lỗi token", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
