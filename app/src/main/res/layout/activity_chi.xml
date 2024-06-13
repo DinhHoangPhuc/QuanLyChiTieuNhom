@@ -97,16 +97,15 @@
         android:id="@+id/textView_ghi_chu_chi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
+
         android:text="Ghi chú"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/et_ghi_chu_chi"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="100dp"
+
         android:background="#FFFFFF"
         android:gravity="top"
         android:hint="viết ở đây..."
@@ -118,7 +117,7 @@
         android:id="@+id/textView_anh_chi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+
         android:text="Ảnh"
         android:textSize="18sp" />
 
@@ -126,7 +125,7 @@
         android:id="@+id/iv_anh_chi"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="16dp"
+
         android:background="?attr/selectableItemBackground"
         android:contentDescription="Thêm ảnh"
         android:onClick="onImageClick"
@@ -138,7 +137,7 @@
         android:id="@+id/btn_luu_chi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+
         android:gravity="center"
         android:text="Lưu" />
 </LinearLayout>
