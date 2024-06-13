@@ -1,25 +1,18 @@
 package com.quanlychitieunhom.Thai;
 
 public class Nhom {
+    private int id;
     private String TenNhom;
-    private int HinhNhom;
-    private String ChucVu;
+    private String MoTa;
+    private String HinhNhom;
 
-    public Nhom(int hinhNhom, String tenNhom, String chucVu) {
-        TenNhom = tenNhom;
-        HinhNhom = hinhNhom;
-        ChucVu = chucVu;
+    public Nhom(int id, String tenNhom, String hinhNhom) {
+        this.id = id;
+        this.TenNhom = tenNhom;
+        this.HinhNhom = hinhNhom;
     }
 
     public Nhom(){
-    }
-
-    public String getChucVu() {
-        return ChucVu;
-    }
-
-    public void setChucVu(String chucVu) {
-        ChucVu = chucVu;
     }
 
     public String getTenNhom() {
@@ -30,11 +23,19 @@ public class Nhom {
         TenNhom = tenNhom;
     }
 
-    public int getHinhNhom() {
+    public String getHinhNhom() {
         return HinhNhom;
     }
 
-    public void setHinhNhom(int hinhNhom) {
+    public void setHinhNhom(String hinhNhom) {
         HinhNhom = hinhNhom;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

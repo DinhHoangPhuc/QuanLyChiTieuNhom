@@ -8,6 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
         android:padding="10dp"
         android:text="Bạn có chắc muốn rời nhóm không?"
         android:textColor="@color/black"
@@ -24,13 +25,16 @@
             android:id="@+id/btnTuChoiRoiNhom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_weight="1"
             android:text="Không" />
 
         <Button
-            android:id="@+id/btnRoiNhom"
+            android:id="@+id/btnTaoNhom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_weight="1"
             android:backgroundTint="#2196F3"
             android:text="Có"
