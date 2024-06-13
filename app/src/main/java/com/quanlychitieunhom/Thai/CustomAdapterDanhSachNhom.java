@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.quanlychitieunhom.R;
 
 import java.util.ArrayList;
@@ -41,8 +42,8 @@ public class CustomAdapterDanhSachNhom extends BaseAdapter {
         View rowView = layoutInflater.inflate(layoutItem,null,true);
         TextView tvId = (TextView) rowView.findViewById(R.id.tvIdNhom);
         tvId.setText(String.valueOf(thanhVien.getId()));
-        ImageView avatar = (ImageView) rowView.findViewById(R.id.imgAvatar);
-        avatar.setImageURI(Uri.parse(thanhVien.getHinhNhom()));
+        ImageView avatar = (ImageView) rowView.findViewById(R.id.imgAvtNhom);
+        Glide.with(layoutInflater.getContext()).load(thanhVien.getHinhNhom()).into(avatar);
         TextView tvName = (TextView) rowView.findViewById(R.id.tvTenNhom);
         tvName.setText(thanhVien.getTenNhom());
         return rowView;

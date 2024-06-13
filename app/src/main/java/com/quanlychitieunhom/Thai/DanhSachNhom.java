@@ -93,9 +93,7 @@ public class DanhSachNhom extends Fragment {
 //        username.setText(usernamee);
         String usn = username.getText().toString();
         //call api load danh sach nhom theo username
-        String urlGetNhom ="http://192.168.1.5:8080/api/nhom/getAllNhom?username=test_user1";
-
-        String urlGetQuy = "http://192.168.1.5:8080/api/quy/getQuy?nhomId=18";
+        String urlGetNhom ="http://192.168.1.10:8080/api/nhom/getAllNhom?username=test_user1";
         StringRequest stringRequestDSN = new StringRequest(Request.Method.GET, urlGetNhom, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -110,13 +108,18 @@ public class DanhSachNhom extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MTcxMTgxLCJleHAiOjE3MTgyNTc1ODF9.bZt7zv_6iG9-FzeMozWg_vQhA7cpmbIUV_uPV2oqjKUCmGgg9QQ_xaKRcdfy9nsT");
+                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjIwMTQ5LCJleHAiOjE3MTgzMDY1NDl9.D-mlxzg8hTyBcn3JvNjX7qeYFWz9eUfIj3woBqcNR2c926rWJkIbKrNzWiYsvLvi");
                 return headers;
             }
         };
         RequestQueue requestQueueDSN = Volley.newRequestQueue(getActivity());
         requestQueueDSN.add(stringRequestDSN);
-
+        taonhom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new TaoNhom());
+            }
+        });
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +134,7 @@ public class DanhSachNhom extends Fragment {
                 bundle.putInt("selectedItemId", selectedItemId);
                 TaoQuy taoQuy = new TaoQuy();
                 taoQuy.setArguments(bundle);
-                String urlGetQuy = "http://192.168.1.5:8080/api/quy/getQuy?nhomId=" + selectedItemId;
+                String urlGetQuy = "http://192.168.1.10:8080/api/quy/getQuy?nhomId=" + selectedItemId;
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, urlGetQuy, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -148,7 +151,7 @@ public class DanhSachNhom extends Fragment {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> headers = new HashMap<>();
-                        headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MTcxMTgxLCJleHAiOjE3MTgyNTc1ODF9.bZt7zv_6iG9-FzeMozWg_vQhA7cpmbIUV_uPV2oqjKUCmGgg9QQ_xaKRcdfy9nsT");
+                        headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
                         return headers;
                     }
                 };
@@ -195,7 +198,7 @@ public class DanhSachNhom extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MTcxMTgxLCJleHAiOjE3MTgyNTc1ODF9.bZt7zv_6iG9-FzeMozWg_vQhA7cpmbIUV_uPV2oqjKUCmGgg9QQ_xaKRcdfy9nsT");
+                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
                 return headers;
             }
         };

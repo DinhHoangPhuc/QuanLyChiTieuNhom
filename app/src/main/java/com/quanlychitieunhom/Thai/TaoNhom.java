@@ -2,8 +2,10 @@ package com.quanlychitieunhom.Thai;
 
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +43,12 @@ import com.quanlychitieunhom.R;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +70,7 @@ public class TaoNhom extends Fragment {
 
     ImageButton btnTaoNhom;
     Uri mUri;
-    String urlTaoNhom = "http://192.168.1.5:8080/api/nhom/taoNhom";
+    String urlTaoNhom = "http://192.168.1.10:8080/api/nhom/taoNhom";
     private ActivityResultLauncher<Intent> mActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -141,23 +150,49 @@ public class TaoNhom extends Fragment {
     private void submitThemNhom() {
         String username = "test_user1";
         String tenNhom = edtTenNhom.getText().toString();
-        String anhNhom = imgAvatar.getDrawable().toString();
         String moTa = edtMoTa.getText().toString();
+        String hinhNhom = imgAvatar.toString();
         if (tenNhom.isEmpty()) {
             Toast.makeText(getActivity(), "Vui lòng nhập tên nhóm", Toast.LENGTH_SHORT).show();
             return;
         }
         JSONObject jsonObject = new JSONObject();
         try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mUri);
+            saveImageToInternalStorage(bitmap);
             jsonObject.put("username", username);
             jsonObject.put("tenNhom", tenNhom);
             jsonObject.put("moTa", moTa);
-            jsonObject.put("anhNhom", anhNhom);
-            Toast.makeText(getActivity(), "Thành công", Toast.LENGTH_SHORT).show();
+            jsonObject.put("hinhNhom", saveImageToInternalStorage(bitmap).toString());
+            edtMoTa.setText(saveImageToInternalStorage(bitmap).toString());
             ThemNhom(jsonObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private Uri saveImageToInternalStorage(Bitmap bitmap) {
+        // Get the context wrapper
+        ContextWrapper wrapper = new ContextWrapper(getActivity().getApplicationContext());
+
+        // Initialize a new file instance to save bitmap object
+        File file = wrapper.getDir("Images",MODE_PRIVATE);
+
+        // Create a unique file name based on the current time
+        String fileName = "Image_" + System.currentTimeMillis() + ".jpg";
+        file = new File(file, fileName);
+
+        try{
+            OutputStream stream = null;
+            stream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+            stream.flush();
+            stream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Return the saved image Uri
+        return Uri.parse(file.getAbsolutePath());
     }
 
     private void ThemNhom(JSONObject jsonObject) {
@@ -170,14 +205,13 @@ public class TaoNhom extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), imgAvatar.toString(), Toast.LENGTH_SHORT).show();
             }
-
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MTcxMTgxLCJleHAiOjE3MTgyNTc1ODF9.bZt7zv_6iG9-FzeMozWg_vQhA7cpmbIUV_uPV2oqjKUCmGgg9QQ_xaKRcdfy9nsT");
+                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
                 return headers;
             }
         };
@@ -211,7 +245,6 @@ public class TaoNhom extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         mActivityLauncher.launch(Intent.createChooser(intent, "Chọn ảnh"));
-
     }
 }
 

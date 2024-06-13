@@ -39,7 +39,7 @@ public class TaoQuy extends Fragment {
 
     EditText edtTienLapQuy;
     ImageButton btnTaoQuy;
-    String urlTaoQuy = "http://192.168.1.5:8080/api/quy/taoQuy";
+    String urlTaoQuy = "http://192.168.1.10:8080/api/quy/taoQuy";
 
     public TaoQuy() {
         // Required empty public constructor
@@ -122,7 +122,7 @@ public class TaoQuy extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MTcxMTgxLCJleHAiOjE3MTgyNTc1ODF9.bZt7zv_6iG9-FzeMozWg_vQhA7cpmbIUV_uPV2oqjKUCmGgg9QQ_xaKRcdfy9nsT");
+                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjIwMTQ5LCJleHAiOjE3MTgzMDY1NDl9.D-mlxzg8hTyBcn3JvNjX7qeYFWz9eUfIj3woBqcNR2c926rWJkIbKrNzWiYsvLvi");
                 return headers;
             }
         };
