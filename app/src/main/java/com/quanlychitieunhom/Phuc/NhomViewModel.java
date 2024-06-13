@@ -11,7 +11,7 @@ public class NhomViewModel extends ViewModel {
 
     public MutableLiveData<Integer> getNhomID() {
         if (nhomID == null) {
-            nhomID = new MutableLiveData<Integer>(1);
+            nhomID = new MutableLiveData<Integer>(0);
         }
         return nhomID;
     }

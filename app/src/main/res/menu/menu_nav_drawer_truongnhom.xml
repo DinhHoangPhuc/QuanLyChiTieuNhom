@@ -50,29 +50,26 @@
     </group>
     <group>
         <item
-            android:id="@+id/QuanLyQuy"
-            android:title="Quản lý quỹ"
-            android:icon="@drawable/baseline_payments_24">
-            <menu >
-                <item
-                    android:id="@+id/ThongBaoDenThanhVien"
-                    android:icon="@drawable/baseline_monetization_on_24"
-                    android:title="Tạo thông báo đóng tiền đến các thành viên" />
-            </menu>
-        </item>
-    </group>
-    <group>
-        <item
             android:id="@+id/ThongKe"
             android:title="Thống kê"
             android:icon="@drawable/baseline_analytics_24">
             <menu>
                 <item
-                    android:id="@+id/ThongKeThu"
-                    android:title="Thống kê thu"/>
+                    android:id="@+id/ThongKeThuTuan"
+                    android:icon="@drawable/baseline_monetization_on_24"
+                    android:title="Thống kê thu tuần"/>
                 <item
-                    android:id="@+id/ThongKeChi"
-                    android:title="Thống kê chi"/>
+                    android:id="@+id/ThongKeThuThang"
+                    android:icon="@drawable/baseline_monetization_on_24"
+                    android:title="Thống kê thu tháng"/>
+                <item
+                    android:id="@+id/ThongKeChiTuan"
+                    android:icon="@drawable/baseline_monetization_on_24"
+                    android:title="Thống kê chi tuần"/>
+                <item
+                    android:id="@+id/ThongKeChiThang"
+                    android:icon="@drawable/baseline_monetization_on_24"
+                    android:title="Thống kê chi tháng"/>
             </menu>
         </item>
     </group>
@@ -84,9 +81,11 @@
             <menu>
                 <item
                     android:id="@+id/XemThongBao"
+                    android:icon="@drawable/baseline_monetization_on_24"
                     android:title="Xem thông báo"/>
                 <item
                     android:id="@+id/TaoThongbao"
+                    android:icon="@drawable/baseline_monetization_on_24"
                     android:title="Tạo thông báo"/>
             </menu>
         </item>

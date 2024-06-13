@@ -94,6 +94,8 @@ public class ThongkeChiThangFragment extends Fragment {
 
         barChart = view.findViewById(R.id.barChart);
 
+
+
         //goi api
         callApi();
 

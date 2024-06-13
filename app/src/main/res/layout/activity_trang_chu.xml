@@ -28,17 +28,17 @@
                 android:id="@+id/toolbar"/>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thống kê tuần"
-            android:id="@+id/btnThongKe"/>
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Thống kê tuần"-->
+<!--            android:id="@+id/btnThongKe"/>-->
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thống kê tháng"
-            android:id="@+id/btnThongKeThang"/>
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Thống kê tháng"-->
+<!--            android:id="@+id/btnThongKeThang"/>-->
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -67,5 +67,5 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_nav_drawer_truongnhom"
-        app:headerLayout="@layout/header_nav_layout_truongnhom" />
+        app:headerLayout="@layout/header_nav_layout_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

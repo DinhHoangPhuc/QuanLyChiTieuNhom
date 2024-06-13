@@ -7,6 +7,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -71,6 +72,8 @@ public class TaoNhom extends Fragment {
     ImageButton btnTaoNhom;
     Uri mUri;
     String urlTaoNhom = "http://192.168.1.10:8080/api/nhom/taoNhom";
+    String token;
+    String username;
     private ActivityResultLauncher<Intent> mActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -115,7 +118,9 @@ public class TaoNhom extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", MODE_PRIVATE);
+        token = sharedPreferences.getString("token", "");
+        username = sharedPreferences.getString("username", "");
     }
 
     @Override
@@ -148,7 +153,7 @@ public class TaoNhom extends Fragment {
         return view;
     }
     private void submitThemNhom() {
-        String username = "test_user1";
+//        String username = "test_user1";
         String tenNhom = edtTenNhom.getText().toString();
         String moTa = edtMoTa.getText().toString();
         String hinhNhom = imgAvatar.toString();
@@ -211,7 +216,7 @@ public class TaoNhom extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
+                headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };

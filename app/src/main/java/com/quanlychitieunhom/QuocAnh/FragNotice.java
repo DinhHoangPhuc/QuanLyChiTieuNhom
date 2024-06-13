@@ -32,10 +32,11 @@ import okhttp3.Response;
  * create an instance of this fragment.
  */
 public class FragNotice extends Fragment {
-    public static int nhomid = 1;
+//    public static int nhomid = 1;
     Button btnBack;
     ListView lvNotifications;
     TextView textView;
+    int nhomid;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,6 +49,10 @@ public class FragNotice extends Fragment {
 
     public FragNotice() {
         // Required empty public constructor
+    }
+
+    public FragNotice(int nhomid) {
+        this.nhomid = nhomid;
     }
 
     /**

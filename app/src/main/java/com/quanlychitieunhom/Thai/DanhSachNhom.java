@@ -1,8 +1,11 @@
 package com.quanlychitieunhom.Thai;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,6 +36,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
+import com.quanlychitieunhom.Phuc.NhomViewModel;
+import com.quanlychitieunhom.Phuc.QuyFragment;
 import com.quanlychitieunhom.R;
 
 import org.json.JSONArray;
@@ -52,10 +58,14 @@ public class DanhSachNhom extends Fragment {
     private String mParam1;
     private String mParam2;
     ListView lvNhom;
-    TextView username,idNhom;
+    TextView username, chucVu;
     Button taonhom,test;
     ArrayList<Nhom> lsNhom = new ArrayList<>();
     CustomAdapterDanhSachNhom customAdapterDanhSachNhom;
+
+    String token;
+    String usernamee;
+
     public DanhSachNhom() {
         // Required empty public constructor
     }
@@ -86,14 +96,25 @@ public class DanhSachNhom extends Fragment {
         lvNhom = view.findViewById(R.id.lvDanhSachNhom);
         test = view.findViewById(R.id.btn_ThamGiaNhom);
         username = view.findViewById(R.id.tvUserName);
+        chucVu = view.findViewById(R.id.tvChucVu);
+
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
+        token = sharedPreferences.getString("token", "");
+        usernamee = sharedPreferences.getString("username", "");
+
+        username.setText(usernamee);
+        chucVu.setText(usernamee);
+
         addEvents();
         return view;
     }
     private void addEvents(){
 //        username.setText(usernamee);
+
+
         String usn = username.getText().toString();
         //call api load danh sach nhom theo username
-        String urlGetNhom ="http://192.168.1.10:8080/api/nhom/getAllNhom?username=test_user1";
+        String urlGetNhom ="http://10.0.2.2:8080/api/nhom/getAllNhom?username="+ usernamee;
         StringRequest stringRequestDSN = new StringRequest(Request.Method.GET, urlGetNhom, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -108,7 +129,7 @@ public class DanhSachNhom extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjIwMTQ5LCJleHAiOjE3MTgzMDY1NDl9.D-mlxzg8hTyBcn3JvNjX7qeYFWz9eUfIj3woBqcNR2c926rWJkIbKrNzWiYsvLvi");
+                headers.put("Authorization", "Bearer "+ token);
                 return headers;
             }
         };
@@ -130,34 +151,39 @@ public class DanhSachNhom extends Fragment {
             @Override
             public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
                 int selectedItemId = lsNhom.get(position).getId();
-                Bundle bundle = new Bundle();
-                bundle.putInt("selectedItemId", selectedItemId);
-                TaoQuy taoQuy = new TaoQuy();
-                taoQuy.setArguments(bundle);
-                String urlGetQuy = "http://192.168.1.10:8080/api/quy/getQuy?nhomId=" + selectedItemId;
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, urlGetQuy, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        loadFragment(new giaodientest());
-                        Toast.makeText(getActivity(), "Quỹ tồn tại cho nhóm này!", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        loadFragment(taoQuy);
-                        Toast.makeText(getActivity(), "Không có Quỹ tồn tại cho nhóm này, vui lòng tạo quỹ!", Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> headers = new HashMap<>();
-                        headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
-                        return headers;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-                requestQueue.add(stringRequest);
-//                loadFragment(taoQuy);
+                NhomViewModel nhomViewModel = new ViewModelProvider(getActivity()).get(NhomViewModel.class);
+                nhomViewModel.setNhomID(selectedItemId);
+//                loadFragment(new QuyFragment());
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("selectedItemId", selectedItemId);
+//                TaoQuy taoQuy = new TaoQuy();
+//                taoQuy.setArguments(bundle);
+//                String urlGetQuy = "http://10.0.2.2:8080/api/quy/getQuy?nhomId=" + selectedItemId;
+//                StringRequest stringRequest = new StringRequest(Request.Method.GET, urlGetQuy, new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+////                        loadFragment(new QuyFragment());
+////                        Toast.makeText(getActivity(), "Quỹ tồn tại cho nhóm này!", Toast.LENGTH_SHORT).show();
+//                        NhomViewModel nhomViewModel = new ViewModelProvider(getActivity()).get(NhomViewModel.class);
+//                        nhomViewModel.setNhomID(selectedItemId);
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        loadFragment(taoQuy);
+//                        Toast.makeText(getActivity(), "Không có Quỹ tồn tại cho nhóm này, vui lòng tạo quỹ!", Toast.LENGTH_SHORT).show();
+//                    }
+//                }) {
+//                    @Override
+//                    public Map<String, String> getHeaders() throws AuthFailureError {
+//                        Map<String, String> headers = new HashMap<>();
+//                        headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
+//                        return headers;
+//                    }
+//                };
+//                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+//                requestQueue.add(stringRequest);
+////                loadFragment(taoQuy);
 //                checkQuyExistence(selectedItemId);
             }
         });
@@ -181,7 +207,7 @@ public class DanhSachNhom extends Fragment {
         }
     }
     public void checkQuyExistence(int nhomId) {
-        String urlGetQuy = "http://192.168.1.5:8080/api/quy/getQuy?nhomId=" + nhomId;
+        String urlGetQuy = "http://10.0.2.2:8080/api/quy/getQuy?nhomId=" + nhomId;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlGetQuy, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -198,7 +224,7 @@ public class DanhSachNhom extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIxIiwiaWF0IjoxNzE4MjI0NTkwLCJleHAiOjE3MTgzMTA5OTB9.f6TnMz47-Gl6PL_gPTuztyZWtUij5lfHlt6_1YmXVgbORwt9W4j8U5T8Je96lpvb");
+                headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };
@@ -219,9 +245,12 @@ public class DanhSachNhom extends Fragment {
     }
     public void loadFragment (Fragment fragment)
     {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft= fm.beginTransaction();
-        ft.replace(R.id.frameDyFrag,fragment);
-        ft.commit();
+        Fragment newFragment = fragment;
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.quanlychitieunhom.Phuc.NhomViewModel;
 import com.quanlychitieunhom.R;
 
 import org.json.JSONException;
@@ -46,7 +48,10 @@ public class ChiaDeuFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", "");
-        nhomId = sharedPreferences.getInt("nhomId", 1); // Default to 1 if not found
+//        nhomId = sharedPreferences.getInt("nhomId", 1); // Default to 1 if not found
+
+        NhomViewModel nhomViewModel = new ViewModelProvider(requireActivity()).get(NhomViewModel.class);
+        nhomId = nhomViewModel.getNhomID().getValue();
 
         callApiChiaDeu();
         callApiSoTienHienTai();
@@ -58,11 +63,11 @@ public class ChiaDeuFragment extends Fragment {
         String urlChiaDeu = BASE_URL + "chia-deu/" + nhomId;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, urlChiaDeu, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, urlChiaDeu, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        tvChiaDeu.setText(response.toString()); // Hoặc logic khác để hiển thị kết quả chia đều
+                        tvChiaDeu.setText(String.valueOf(response.optDouble("tienThanhVien"))); // Hoặc logic khác để hiển thị kết quả chia đều
                     }
                 }, new Response.ErrorListener() {
 
@@ -92,12 +97,12 @@ public class ChiaDeuFragment extends Fragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            String soTienHienTai = response.getString("soTienHienTai");
+//                        try {
+                            String soTienHienTai = String.valueOf(response.optDouble("soTienHienTai"));
                             tvTienHienTai.setText(soTienHienTai);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                 }, new Response.ErrorListener() {
 

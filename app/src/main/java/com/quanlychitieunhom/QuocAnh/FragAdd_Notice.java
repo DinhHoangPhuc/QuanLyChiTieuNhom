@@ -29,6 +29,8 @@ import java.net.URL;
 public class FragAdd_Notice extends Fragment {
     Button btnAddNotification,btnBack;
     EditText edtTitle, edtContent;
+
+    int nhomId;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,6 +42,10 @@ public class FragAdd_Notice extends Fragment {
 
     public FragAdd_Notice() {
         // Required empty public constructor
+    }
+
+    public FragAdd_Notice(int nhomId) {
+        this.nhomId = nhomId;
     }
 
     /**
@@ -107,7 +113,7 @@ public class FragAdd_Notice extends Fragment {
         new Thread(() -> {
             try {
                 JSONObject newNotification = new JSONObject();
-                newNotification.put("nhomid", 1);
+                newNotification.put("nhomid", nhomId);
                 newNotification.put("tieude", tieude);
                 newNotification.put("noiDung", noiDung);
                 newNotification.put("ngaydang", ngaydang);

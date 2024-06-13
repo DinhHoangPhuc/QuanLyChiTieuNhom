@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.quanlychitieunhom.Phuc.NhomViewModel;
 import com.quanlychitieunhom.R;
 
 import org.json.JSONException;
@@ -68,7 +70,10 @@ public class ThuFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", "");
-        nhomId = sharedPreferences.getInt("nhomId", 1); // Default to 1 if not found
+//        nhomId = sharedPreferences.getInt("nhomId", 1); // Default to 1 if not found
+
+        NhomViewModel nhomViewModel = new ViewModelProvider(requireActivity()).get(NhomViewModel.class);
+        nhomId = nhomViewModel.getNhomID().getValue();
 
         btnSoTien.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,8 +161,9 @@ public class ThuFragment extends Fragment {
         JSONObject requestBody = new JSONObject();
         try {
             requestBody.put("soTien", soTien);
+            requestBody.put("moTa", ghiChu);
             requestBody.put("ngayThu", ngayThu);
-            requestBody.put("ghiChu", ghiChu);
+            requestBody.put("nhomId", nhomId);
         } catch (JSONException e) {
             e.printStackTrace();
         }

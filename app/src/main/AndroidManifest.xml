@@ -18,25 +18,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".QuocAnh.Notificartion"
+            android:name=".QuocAnh.FragAdd_Notice"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.Add_Notification"
+            android:name=".QuocAnh.FragInvite_QR"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.Invite_QR"
+            android:name=".QuocAnh.FragJoin_Group"
+            android:exported="true" />
+        <activity
+            android:name=".QuocAnh.FragNotice"
             android:exported="true" />
         <activity
             android:name=".Phuc.TrangChu"
             android:exported="true" />
         <activity
-            android:name=".Ngan.TVMdong"
+            android:name=".Ngan.ChiaDeuFragment"
             android:exported="true" />
         <activity
-            android:name=".Ngan.HoanTien"
+            android:name=".Ngan.HoanTienFragment"
             android:exported="true" />
         <activity
-            android:name=".Ngan.ChiaDeu"
+            android:name=".Ngan.TVMDongFragment"
             android:exported="true" />
         <activity
             android:name=".Tuyen.ChiFragment"

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.gson.JsonObject;
 import com.quanlychitieunhom.R;
+import com.quanlychitieunhom.Thai.DanhSachNhom;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +62,11 @@ public class QuyFragment extends Fragment {
     private Button btnThu, btnChi;
 
     private ArrayList<Thu> thuArrayList = new ArrayList<>();
+    private int nhomID;
+
+    public QuyFragment(int nhomId) {
+        this.nhomID = nhomId;
+    }
 
     public QuyFragment() {
         // Required empty public constructor
@@ -125,7 +132,7 @@ public class QuyFragment extends Fragment {
     }
 
     private void callApi(int thuChi) {
-        String url = "http://10.0.2.2:8080/api/quy/getQuy?nhomId=4";
+        String url = "http://10.0.2.2:8080/api/quy/getQuy?nhomId=" + nhomID;
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
@@ -136,6 +143,13 @@ public class QuyFragment extends Fragment {
 
                         @Override
                         public void onResponse(JSONObject response) {
+                            String error = response.optString("error");
+
+                            if(!error.isEmpty()){
+                                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
                             int soTienBD = response.optInt("soTienBD");
                             int soTienHT = response.optInt("soTienHT");
                             soTienBanDau.setText(String.valueOf(soTienBD));
@@ -185,7 +199,8 @@ public class QuyFragment extends Fragment {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(requireContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Quỹ không tồn tại", Toast.LENGTH_SHORT).show();
+                            
                         }
                     })
             {
