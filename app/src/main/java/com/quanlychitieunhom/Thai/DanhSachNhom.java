@@ -31,7 +31,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
 import com.quanlychitieunhom.R;
 
 import org.json.JSONArray;
@@ -41,9 +40,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class DanhSachNhom extends Fragment {
     private static final String ARG_PARAM1 = "param1";
