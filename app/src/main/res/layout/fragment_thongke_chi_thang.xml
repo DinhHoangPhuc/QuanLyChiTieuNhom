@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Phuc.ThongkeChiThangFragment">
+    tools:context=".Home.ThongkeChiThangFragment">
 
     <com.github.mikephil.charting.charts.BarChart
         android:layout_width="match_parent"

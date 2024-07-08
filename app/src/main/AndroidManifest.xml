@@ -18,49 +18,49 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".QuocAnh.FragAdd_Notice"
+            android:name=".Home.FragAdd_Notice"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.FragInvite_QR"
+            android:name=".Home.FragInvite_QR"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.FragJoin_Group"
+            android:name=".Home.FragJoin_Group"
             android:exported="true" />
         <activity
-            android:name=".QuocAnh.FragNotice"
+            android:name=".Home.FragNotice"
             android:exported="true" />
         <activity
-            android:name=".Phuc.TrangChu"
+            android:name=".Home.UI.Display.TrangChu"
             android:exported="true" />
         <activity
-            android:name=".Ngan.ChiaDeuFragment"
+            android:name=".Home.ChiaDeuFragment"
             android:exported="true" />
         <activity
-            android:name=".Ngan.HoanTienFragment"
+            android:name=".Home.HoanTienFragment"
             android:exported="true" />
         <activity
-            android:name=".Ngan.TVMDongFragment"
+            android:name=".Home.TVMDongFragment"
             android:exported="true" />
         <activity
-            android:name=".Tuyen.ChiFragment"
+            android:name=".Home.ChiFragment"
             android:exported="true" />
         <activity
-            android:name=".Tuyen.ThuFragment"
+            android:name=".Home.ThuFragment"
             android:exported="true" />
         <activity
-            android:name=".Thai.DanhSachNhom"
+            android:name=".GroupList.UI.Display.DanhSachNhom"
             android:exported="true" />
         <activity
-            android:name=".Thai.TrangChuTruongNhom"
+            android:name=".Home.TrangChuTruongNhom"
             android:exported="true" />
         <activity
-            android:name=".Phuc.ThongKe"
+            android:name=".Home.ThongKe"
             android:exported="true" />
         <activity
-            android:name=".Phuc.DangKy"
+            android:name=".Register.UI.Display.DangKy"
             android:exported="true" />
         <activity
-            android:name=".Phuc.DangNhap"
+            android:name=".Login.UI.Display.DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

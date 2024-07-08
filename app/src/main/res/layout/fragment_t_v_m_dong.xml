@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:gravity=""
     android:orientation="vertical"
-    tools:context=".Ngan.TVMDongFragment">
+    tools:context=".Home.TVMDongFragment">
 
 
     <View
