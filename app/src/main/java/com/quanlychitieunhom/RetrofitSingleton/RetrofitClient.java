@@ -1,5 +1,7 @@
 package com.quanlychitieunhom.RetrofitSingleton;
 
+import android.content.Context;
+
 import com.quanlychitieunhom.GroupList.Data.Repository.GroupListApiCall;
 import com.quanlychitieunhom.Quy.Data.Repository.QuyApiCall;
 import com.quanlychitieunhom.RefreshToken.JwtInterceptor;
@@ -18,22 +20,31 @@ public class RetrofitClient {
 
     private RetrofitClient() {}
 
-    public static GroupListApiCall getGroupListApiCall(RefreshTokenCallback refreshTokenCallback, String refreshToken, String token) {
-        return getInstance(refreshTokenCallback, refreshToken, token).create(GroupListApiCall.class);
+    public static GroupListApiCall getGroupListApiCall(RefreshTokenCallback refreshTokenCallback,
+                                                       String refreshToken,
+                                                       String token,
+                                                       Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(GroupListApiCall.class);
     }
 
-    public static QuyApiCall getQuyApiCall(RefreshTokenCallback refreshTokenCallback, String refreshToken, String token) {
-        return getInstance(refreshTokenCallback, refreshToken, token).create(QuyApiCall.class);
+    public static QuyApiCall getQuyApiCall(RefreshTokenCallback refreshTokenCallback,
+                                           String refreshToken,
+                                           String token,
+                                           Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(QuyApiCall.class);
     }
 
-    public static Retrofit getInstance(RefreshTokenCallback refreshTokenCallback, String refreshToken, String token) {
+    public static Retrofit getInstance(RefreshTokenCallback refreshTokenCallback,
+                                       String refreshToken,
+                                       String token,
+                                       Context context) {
         if (retrofit == null) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
             OkHttpClient.Builder client = new OkHttpClient.Builder()
                     .addInterceptor(logging)
                     .addInterceptor(new JwtInterceptor(token))
-                    .authenticator(new TokenAuthenticator(refreshTokenCallback, refreshToken));
+                    .authenticator(new TokenAuthenticator(refreshTokenCallback, refreshToken, context));
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

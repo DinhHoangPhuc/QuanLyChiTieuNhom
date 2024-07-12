@@ -1,5 +1,7 @@
 package com.quanlychitieunhom.Quy.Data.Repository;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.quanlychitieunhom.Quy.UI.State.QuyModel;
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
@@ -20,16 +22,18 @@ public class QuyRepoImpl implements QuyRepo {
                        QuyCallback callback,
                        RefreshTokenCallback refreshTokenCallback,
                        String refreshToken,
-                       String token) {
-        callApi(nhomId, callback, refreshTokenCallback, refreshToken, token);
+                       String token,
+                       Context context) {
+        callApi(nhomId, callback, refreshTokenCallback, refreshToken, token, context);
     }
 
     private void callApi(int nhomId,
                          QuyCallback callback,
                          RefreshTokenCallback refreshTokenCallback,
                          String refreshToken,
-                         String token) {
-        QuyApiCall apiCall = RetrofitClient.getQuyApiCall(refreshTokenCallback, refreshToken, token);
+                         String token,
+                         Context context) {
+        QuyApiCall apiCall = RetrofitClient.getQuyApiCall(refreshTokenCallback, refreshToken, token, context);
         Call<QuyModel> call = apiCall.getQuy(nhomId);
         call.enqueue(new Callback<QuyModel>() {
             @Override

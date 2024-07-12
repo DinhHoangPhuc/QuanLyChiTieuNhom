@@ -107,7 +107,7 @@ public class QuyFragment extends Fragment {
 
     private void getQuy(int nhomID) {
         quyViewModel = new ViewModelProvider(requireActivity()).get(QuyViewModel.class);
-        quyViewModel.getQuy(nhomID, token, refreshToken);
+        quyViewModel.getQuy(nhomID, token, refreshToken, getContext());
     }
 
     private void loadQuy() {

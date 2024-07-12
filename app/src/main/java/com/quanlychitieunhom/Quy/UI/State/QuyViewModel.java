@@ -1,5 +1,7 @@
 package com.quanlychitieunhom.Quy.UI.State;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -23,13 +25,15 @@ public class QuyViewModel extends ViewModel {
 
     public void getQuy(int nhomId,
                        String token,
-                       String refreshToken) {
-        getQuyCall(nhomId, token, refreshToken);
+                       String refreshToken,
+                       Context context) {
+        getQuyCall(nhomId, token, refreshToken, context);
     }
 
     private void getQuyCall(int nhomId,
                             String token,
-                            String refreshToken) {
+                            String refreshToken,
+                            Context context) {
         quyRepo.getQuy(nhomId, new QuyCallback() {
             @Override
             public void onApiResponse(QuyModel quyModel, String message) {
@@ -46,6 +50,6 @@ public class QuyViewModel extends ViewModel {
                     refreshTokenViewState.postValue(response);
                 }
             }
-        }, refreshToken, token);
+        }, refreshToken, token, context);
     }
 }

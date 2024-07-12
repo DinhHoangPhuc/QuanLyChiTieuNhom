@@ -1,5 +1,6 @@
 package com.quanlychitieunhom.GroupList.Data.Repository;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -23,16 +24,19 @@ public class GroupListRepoImpl implements GroupListRepo{
                              String token,
                              GroupListCallback callback,
                              RefreshTokenCallback refreshTokenCallback,
-                             String refreshToken) {
-        getGroupListFromApi(username, callback, refreshTokenCallback, refreshToken, token);
+                             String refreshToken,
+                             Context context) {
+        getGroupListFromApi(username, callback, refreshTokenCallback, refreshToken, token, context);
     }
 
     private void getGroupListFromApi(String username,
                                      GroupListCallback callback,
                                      RefreshTokenCallback refreshTokenCallback,
                                      String refreshToken,
-                                     String token) {
-        GroupListApiCall groupListApiCall = RetrofitClient.getGroupListApiCall(refreshTokenCallback, refreshToken, token);
+                                     String token,
+                                     Context context) {
+        GroupListApiCall groupListApiCall = RetrofitClient.getGroupListApiCall(refreshTokenCallback, refreshToken, token, context);
+//        String tokenWithBearer = "Bearer " + token;
         Call<List<NhomModel>> call = groupListApiCall.getGroupList(username);
         call.enqueue(new retrofit2.Callback<List<NhomModel>>() {
             @Override

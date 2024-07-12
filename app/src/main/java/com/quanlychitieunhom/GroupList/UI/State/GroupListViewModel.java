@@ -1,5 +1,7 @@
 package com.quanlychitieunhom.GroupList.UI.State;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -20,32 +22,40 @@ public class GroupListViewModel extends ViewModel {
     public void getGroupList(String username,
                              String token,
                              long expireTime,
-                             String refreshToken) {
-        getGroupListCall(username, token, expireTime, refreshToken);
+                             String refreshToken,
+                             Context context) {
+        getGroupListCall(username, token, expireTime, refreshToken, context);
     }
 
     private void getGroupListCall(String username,
                                   String token,
                                   long expireTime,
-                                  String refreshToken) {
-        groupListViewState.postValue(new GroupListViewState(GroupListState.LOADING, null));
-        groupListRepo.getGroupList(username, token, new GroupListCallback() {
+                                  String refreshToken,
+                                  Context context) {
+        groupListViewState.postValue(new GroupListViewState(GroupListState.LOADING,
+                                null));
+        groupListRepo.getGroupList(username,
+                                    token,
+                                    new GroupListCallback() {
             @Override
-            public void onApiResponse(String message, List<NhomModel> nhomModelList) {
-                if(message.equals("Success")) {
-                    groupListViewState.postValue(new GroupListViewState(GroupListState.SUCCESS, new ListNhomModel(nhomModelList)));
+            public void onApiResponse(int statusCode,
+                                      List<NhomModel> nhomModelList) {
+                if(statusCode == 200) {
+                    groupListViewState.postValue(new GroupListViewState(GroupListState.SUCCESS,
+                            new ListNhomModel(nhomModelList)));
                 } else {
-                    groupListViewState.postValue(new GroupListViewState(GroupListState.ERROR, null));
+                    groupListViewState.postValue(new GroupListViewState(GroupListState.ERROR,
+                            null));
                 }
             }
-        }, new RefreshTokenCallback() {
+            }, new RefreshTokenCallback() {
             @Override
             public void onApiResponse(LoginResonpse response) {
                 if(response != null) {
                     refreshTokenViewState.postValue(response);
                 }
             }
-        }, refreshToken);
+        }, refreshToken, context);
     }
 
     public MutableLiveData<GroupListViewState> getGroupListViewState() {

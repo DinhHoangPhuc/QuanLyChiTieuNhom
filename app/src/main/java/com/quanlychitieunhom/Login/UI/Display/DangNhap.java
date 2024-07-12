@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -168,8 +169,13 @@ public class DangNhap extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
         if(!token.isEmpty()) {
+            Log.d("Login: Token is not empty", token);
+
             Intent intent = new Intent(DangNhap.this, TrangChu.class);
             startActivity(intent);
+        }
+        else {
+            Log.d("Login: Token is empty", token);
         }
     }
 

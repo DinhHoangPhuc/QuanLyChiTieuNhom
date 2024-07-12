@@ -1,5 +1,7 @@
 package com.quanlychitieunhom.GroupList.Data.Repository;
 
+import android.content.Context;
+
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
 
 public interface GroupListRepo {
@@ -7,5 +9,6 @@ public interface GroupListRepo {
                       String token,
                       GroupListCallback callback,
                       RefreshTokenCallback refreshTokenCallback,
-                      String refreshToken);
+                      String refreshToken,
+                      Context context);
 }

@@ -6,5 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface GroupListCallback {
-    void onApiResponse(int statusCode, List<NhomModel> nhomModelList);
+    void onApiResponse(int statusCode,
+                       List<NhomModel> nhomModelList);
 }

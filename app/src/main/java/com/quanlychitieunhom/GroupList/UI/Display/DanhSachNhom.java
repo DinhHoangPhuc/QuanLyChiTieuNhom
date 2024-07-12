@@ -91,7 +91,7 @@ public class DanhSachNhom extends Fragment {
 
     private void loadGroupList() {
         GroupListViewModel groupListViewModel = new ViewModelProvider(requireActivity()).get(GroupListViewModel.class);
-        groupListViewModel.getGroupList(username_display, token, expireTime, refreshToken);
+        groupListViewModel.getGroupList(username_display, token, expireTime, refreshToken, getContext());
         groupListViewModel.getGroupListViewState().observe(getViewLifecycleOwner(), groupListViewState -> {
             if(groupListViewState.getGroupListState() == GroupListState.LOADING) {
                 Toast.makeText(getActivity(), "Loading", Toast.LENGTH_SHORT).show();
