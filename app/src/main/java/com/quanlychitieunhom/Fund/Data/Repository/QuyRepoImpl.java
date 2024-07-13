@@ -1,9 +1,9 @@
-package com.quanlychitieunhom.Quy.Data.Repository;
+package com.quanlychitieunhom.Fund.Data.Repository;
 
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.quanlychitieunhom.Quy.UI.State.QuyModel;
+import com.quanlychitieunhom.Fund.UI.State.QuyModel;
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
 import com.quanlychitieunhom.RetrofitSingleton.RetrofitClient;
 

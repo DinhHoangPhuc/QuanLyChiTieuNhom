@@ -4,77 +4,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Quy.UI.Display.QuyFragment">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:text="Ten nhom"
-        android:id="@+id/tenNhom"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="15dp"
-        android:text="Số tiền ban đầu" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:text="200"
-        android:id="@+id/soTienBanDau"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="15dp"
-        android:text="Số tiền hiện tại" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:text="2000000"
-        android:id="@+id/soTienHienTai"/>
+    tools:context=".Fund.UI.Display.QuyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
+        android:orientation="vertical"
+        android:id="@+id/quyContainer">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thu"
-            android:layout_weight="5"
-            android:id="@+id/btnThu"/>
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="Ten nhom"
+            android:id="@+id/tenNhom"/>
 
-        <Button
-            android:id="@+id/btnChi"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Chi" />
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="Số tiền ban đầu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="200"
+            android:id="@+id/soTienBanDau"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="Số tiền hiện tại" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="2000000"
+            android:id="@+id/soTienHienTai"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu"
+                android:layout_weight="5"
+                android:id="@+id/btnThu"/>
+
+            <Button
+                android:id="@+id/btnChi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="Chi" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvThu"/>
+
     </LinearLayout>
 
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lvThu"/>
+        android:id="@+id/taoQuyContainer"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Bạn chưa có quỹ, bạn có muốn tạo quỹ không ?"
+            android:textSize="20dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tạo quỹ"
+            android:id="@+id/btnTaoQuy"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </LinearLayout>

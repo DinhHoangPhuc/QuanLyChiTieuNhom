@@ -72,7 +72,7 @@ public class DangNhap extends AppCompatActivity {
                 setToken(loginViewState.getToken());
                 setRefreshToken(loginViewState.getRefreshToken());
                 setUsername(loginViewState.getUsername());
-                setExpireTime(decodeExpireTime(loginViewState.getToken()));
+//                setExpireTime(decodeExpireTime(loginViewState.getToken()));
 
                 Intent intent = new Intent(DangNhap.this, TrangChu.class);
                 startActivity(intent);
@@ -120,8 +120,8 @@ public class DangNhap extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.putString("token", token);
-        editor.apply();
         editor.commit();
+        Log.d("Set token successfully in login activity", token);
     }
 
     private void setRefreshToken(String refreshToken) {
@@ -130,7 +130,6 @@ public class DangNhap extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.putString("refreshToken", refreshToken);
-        editor.apply();
         editor.commit();
     }
 
@@ -145,15 +144,15 @@ public class DangNhap extends AppCompatActivity {
         return Long.parseLong(expireTime);
     }
 
-    private void setExpireTime(long expireTime) {
-        SharedPreferences sharedPreferences;
-        SharedPreferences.Editor editor;
-        sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        editor.putLong("expireTime", expireTime);
-        editor.apply();
-        editor.commit();
-    }
+//    private void setExpireTime(long expireTime) {
+//        SharedPreferences sharedPreferences;
+//        SharedPreferences.Editor editor;
+//        sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+//        editor.putLong("expireTime", expireTime);
+//        editor.apply();
+//        editor.commit();
+//    }
 
     private void setUsername(String username) {
         SharedPreferences sharedPreferences;

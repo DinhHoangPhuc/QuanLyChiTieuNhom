@@ -36,7 +36,9 @@ public class LoginRepoImpl implements LoginRepo{
             public void onResponse(Call<LoginResonpse> call, Response<LoginResonpse> response) {
                 if (response.isSuccessful()) {
                     LoginResonpse responseMap = response.body();
+                    assert responseMap != null;
                     loginCallback.onApiResponse("Success", responseMap.getUsername(), responseMap.getToken(), responseMap.getRefreshToken());
+                    Log.d("Get token success when login", responseMap.getToken() + ", " + responseMap.getToken());
                 }else {
                     ResponseBody responseBody = response.errorBody();
                     try {

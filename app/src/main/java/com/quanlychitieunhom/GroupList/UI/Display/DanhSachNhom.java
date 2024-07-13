@@ -24,7 +24,7 @@ import com.quanlychitieunhom.GroupList.UI.State.GroupListState;
 import com.quanlychitieunhom.GroupList.UI.State.GroupListViewModel;
 import com.quanlychitieunhom.GroupList.UI.State.ListNhomModel;
 import com.quanlychitieunhom.GroupList.UI.State.NhomModel;
-import com.quanlychitieunhom.Quy.UI.Display.QuyFragment;
+import com.quanlychitieunhom.Fund.UI.Display.QuyFragment;
 import com.quanlychitieunhom.Login.UI.Display.DangNhap;
 import com.quanlychitieunhom.R;
 

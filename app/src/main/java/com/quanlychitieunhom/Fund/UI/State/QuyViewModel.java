@@ -1,4 +1,4 @@
-package com.quanlychitieunhom.Quy.UI.State;
+package com.quanlychitieunhom.Fund.UI.State;
 
 import android.content.Context;
 
@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.quanlychitieunhom.Login.Data.Repository.LoginResonpse;
-import com.quanlychitieunhom.Quy.Data.Repository.QuyCallback;
-import com.quanlychitieunhom.Quy.Data.Repository.QuyRepo;
-import com.quanlychitieunhom.Quy.Data.Repository.QuyRepoImpl;
+import com.quanlychitieunhom.Fund.Data.Repository.QuyCallback;
+import com.quanlychitieunhom.Fund.Data.Repository.QuyRepo;
+import com.quanlychitieunhom.Fund.Data.Repository.QuyRepoImpl;
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
 
 public class QuyViewModel extends ViewModel {
@@ -34,6 +34,7 @@ public class QuyViewModel extends ViewModel {
                             String token,
                             String refreshToken,
                             Context context) {
+        quyViewStateLiveData.postValue(new QuyViewState(QuyState.LOADING, null));
         quyRepo.getQuy(nhomId, new QuyCallback() {
             @Override
             public void onApiResponse(QuyModel quyModel, String message) {

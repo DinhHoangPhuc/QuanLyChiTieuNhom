@@ -2,10 +2,10 @@ package com.quanlychitieunhom.RetrofitSingleton;
 
 import android.content.Context;
 
+import com.quanlychitieunhom.CreateFund.Data.Repository.CreateFundApiCall;
 import com.quanlychitieunhom.GroupList.Data.Repository.GroupListApiCall;
-import com.quanlychitieunhom.Quy.Data.Repository.QuyApiCall;
+import com.quanlychitieunhom.Fund.Data.Repository.QuyApiCall;
 import com.quanlychitieunhom.RefreshToken.JwtInterceptor;
-import com.quanlychitieunhom.RefreshToken.RefreshTokenApiCall;
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
 import com.quanlychitieunhom.RefreshToken.TokenAuthenticator;
 
@@ -32,6 +32,13 @@ public class RetrofitClient {
                                            String token,
                                            Context context) {
         return getInstance(refreshTokenCallback, refreshToken, token, context).create(QuyApiCall.class);
+    }
+
+    public static CreateFundApiCall getCreateFundApiCall(RefreshTokenCallback refreshTokenCallback,
+                                                         String refreshToken,
+                                                         String token,
+                                                         Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(CreateFundApiCall.class);
     }
 
     public static Retrofit getInstance(RefreshTokenCallback refreshTokenCallback,

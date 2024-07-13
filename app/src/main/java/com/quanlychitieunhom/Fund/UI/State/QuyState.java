@@ -1,4 +1,4 @@
-package com.quanlychitieunhom.Quy.UI.State;
+package com.quanlychitieunhom.Fund.UI.State;
 
 public enum QuyState {
     LOADING,

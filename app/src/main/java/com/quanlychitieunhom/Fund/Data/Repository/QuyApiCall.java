@@ -1,6 +1,6 @@
-package com.quanlychitieunhom.Quy.Data.Repository;
+package com.quanlychitieunhom.Fund.Data.Repository;
 
-import com.quanlychitieunhom.Quy.UI.State.QuyModel;
+import com.quanlychitieunhom.Fund.UI.State.QuyModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

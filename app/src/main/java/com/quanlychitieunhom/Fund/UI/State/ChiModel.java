@@ -1,4 +1,4 @@
-package com.quanlychitieunhom.Quy.UI.State;
+package com.quanlychitieunhom.Fund.UI.State;
 
 import java.util.Date;
 
@@ -8,7 +8,10 @@ public class ChiModel {
     private Date ngayChi;
     private String moTa;
 
-    public ChiModel(int id, int soTien, Date ngayChi, String moTa) {
+    public ChiModel(int id,
+                    int soTien,
+                    Date ngayChi,
+                    String moTa) {
         this.id = id;
         this.soTien = soTien;
         this.ngayChi = ngayChi;
