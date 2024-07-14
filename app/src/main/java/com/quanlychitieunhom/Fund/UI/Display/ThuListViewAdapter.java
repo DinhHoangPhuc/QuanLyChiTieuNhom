@@ -6,13 +6,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.quanlychitieunhom.Fund.UI.State.ThuModel;
-import com.quanlychitieunhom.Home.Thu;
+import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 import com.quanlychitieunhom.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ThuListViewAdapter extends BaseAdapter {
     private Activity activity;
@@ -50,9 +48,9 @@ public class ThuListViewAdapter extends BaseAdapter {
         TextView tvSoTienThu = rowView.findViewById(R.id.tvSoTien);
         TextView tvMoTa = rowView.findViewById(R.id.tvMoTa);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String ngayThu = sdf.format(thu.getNgayThu());
-        tvNgayThu.setText(ngayThu);
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        String ngayThu = sdf.format(thu.getNgayThu());
+        tvNgayThu.setText(thu.getNgayThu());
         tvSoTienThu.setText(String.valueOf(thu.getSoTien()));
         tvMoTa.setText(thu.getMoTa());
 

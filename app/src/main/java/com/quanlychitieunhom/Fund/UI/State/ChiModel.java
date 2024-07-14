@@ -5,12 +5,12 @@ import java.util.Date;
 public class ChiModel {
     private int id;
     private int soTien;
-    private Date ngayChi;
+    private String ngayChi;
     private String moTa;
 
     public ChiModel(int id,
                     int soTien,
-                    Date ngayChi,
+                    String ngayChi,
                     String moTa) {
         this.id = id;
         this.soTien = soTien;
@@ -26,7 +26,7 @@ public class ChiModel {
         return soTien;
     }
 
-    public Date getNgayChi() {
+    public String getNgayChi() {
         return ngayChi;
     }
 

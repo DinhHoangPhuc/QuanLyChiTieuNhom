@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,11 @@ import android.widget.Toast;
 
 import com.quanlychitieunhom.CreateFund.UI.Display.TaoQuy;
 import com.quanlychitieunhom.Fund.UI.State.ChiModel;
-import com.quanlychitieunhom.Fund.UI.State.ThuModel;
+import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 import com.quanlychitieunhom.Fund.UI.State.QuyModel;
 import com.quanlychitieunhom.Fund.UI.State.QuyState;
 import com.quanlychitieunhom.Fund.UI.State.QuyViewModel;
 import com.quanlychitieunhom.R;
-import com.quanlychitieunhom.Uitls.ViewModel.NhomViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,15 +41,13 @@ public class QuyFragment extends Fragment {
     private int nhomID;
     private ThuListViewAdapter thuListViewAdapter;
     private ChiListViewAdapter chiListViewAdapter;
-    private NhomViewModel nhomViewModel;
 
     private QuyViewModel quyViewModel;
     private String token, refreshToken;
 
     public QuyFragment(int nhomId) {
         this.nhomID = nhomId;
-        nhomViewModel = new ViewModelProvider(requireActivity()).get(NhomViewModel.class);
-        nhomViewModel.setNhomID(nhomId);
+
     }
 
     public QuyFragment() {
@@ -73,6 +71,8 @@ public class QuyFragment extends Fragment {
         getSharedPref();
 
         getQuy(nhomID);
+
+//        setNhomIDSharedPref(nhomID);
 
         handleTaoQuyEvent();
 
@@ -157,6 +157,7 @@ public class QuyFragment extends Fragment {
                 setThuList(quyModel);
                 setThuListViewAdapter();
                 setChiList(quyModel);
+                Log.d("QuyId", String.valueOf(quyModel.getId()));
 //                tenNhom.setText(quyModel.());
             } else {
                 Toast.makeText(requireContext(), "Quỹ không tồn tại", Toast.LENGTH_SHORT).show();
@@ -168,9 +169,10 @@ public class QuyFragment extends Fragment {
         if(quyModel.getThus() != null) {
 //                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             List<ThuModel> thuList = quyModel.getThus();
+            setNhomIDSharedPref(quyModel.getId());
             thuList.stream().forEach(thuModel -> {
 //                        String formattedDate = formatter.format(thuModel.getNgayThu());
-                thuArrayList.add(new ThuModel(thuModel.getId(), thuModel.getSoTien(), thuModel.getMoTa(), thuModel.getNgayThu()));
+                thuArrayList.add(new ThuModel(thuModel.getNhomId(), thuModel.getSoTien(), thuModel.getMoTa(), thuModel.getNgayThu()));
             });
         }
     }
@@ -200,6 +202,11 @@ public class QuyFragment extends Fragment {
         refreshToken = sharedPreferences.getString("refreshToken", "");
     }
 
-
+    private void setNhomIDSharedPref(int nhomID) {
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("dataNhom", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("nhomID", nhomID);
+        editor.commit();
+    }
 
 }

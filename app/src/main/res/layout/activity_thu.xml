@@ -107,7 +107,6 @@
         android:id="@+id/et_ghi_chu"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
         android:background="#FFFFFF"
         android:gravity="top"
         android:hint="viết ở đây..."
@@ -118,7 +117,6 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Ảnh"
         android:textSize="18sp" />
 
@@ -126,7 +124,6 @@
         android:id="@+id/iv_anh"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="16dp"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="Thêm ảnh"
         android:onClick="onImageClick"

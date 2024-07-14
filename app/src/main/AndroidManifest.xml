@@ -42,10 +42,10 @@
             android:name=".Home.TVMDongFragment"
             android:exported="true" />
         <activity
-            android:name=".Home.ChiFragment"
+            android:name=".CreateChi.UI.Display.ChiFragment"
             android:exported="true" />
         <activity
-            android:name=".Home.ThuFragment"
+            android:name=".CreateThu.UI.Display.ThuFragment"
             android:exported="true" />
         <activity
             android:name=".GroupList.UI.Display.DanhSachNhom"

@@ -47,9 +47,9 @@ public class ChiListViewAdapter extends BaseAdapter {
         TextView tvSoTienChi = view.findViewById(R.id.tvSoTien);
         TextView tvMoTa = view.findViewById(R.id.tvMoTa);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String ngayThu = sdf.format(chi.getNgayChi());
-        tvNgayChi.setText(ngayThu);
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        String ngayThu = sdf.format(chi.getNgayChi());
+        tvNgayChi.setText(chi.getNgayChi());
         tvSoTienChi.setText(String.valueOf(chi.getSoTien()));
         tvMoTa.setText(chi.getMoTa());
 

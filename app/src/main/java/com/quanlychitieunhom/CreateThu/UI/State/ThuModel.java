@@ -1,29 +1,29 @@
-package com.quanlychitieunhom.Fund.UI.State;
+package com.quanlychitieunhom.CreateThu.UI.State;
 
 import java.util.Date;
 
 public class ThuModel {
-    private int id;
+    private int nhomId;
     private int soTien;
     private String moTa;
-    private Date ngayThu;
+    private String ngayThu;
 
     public ThuModel(int id,
                     int soTien,
                     String moTa,
-                    Date ngayThu) {
-        this.id = id;
+                    String ngayThu) {
+        this.nhomId = id;
         this.soTien = soTien;
         this.moTa = moTa;
         this.ngayThu = ngayThu;
     }
 
-    public int getId() {
-        return id;
+    public int getNhomId() {
+        return nhomId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNhomId(int nhomId) {
+        this.nhomId = nhomId;
     }
 
     public int getSoTien() {
@@ -42,11 +42,11 @@ public class ThuModel {
         this.moTa = moTa;
     }
 
-    public Date getNgayThu() {
+    public String getNgayThu() {
         return ngayThu;
     }
 
-    public void setNgayThu(Date ngayThu) {
+    public void setNgayThu(String ngayThu) {
         this.ngayThu = ngayThu;
     }
 }
