@@ -1,7 +1,10 @@
 package com.quanlychitieunhom.CreateChi.UI.Display;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -31,13 +35,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.quanlychitieunhom.CreateChi.UI.State.ChiModel;
+import com.quanlychitieunhom.CreateChi.UI.State.CreateChiViewModel;
+import com.quanlychitieunhom.CreateThu.UI.State.CreateThuViewModel;
+import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 import com.quanlychitieunhom.R;
+import com.quanlychitieunhom.Uitls.SharedReferenceUtils;
+import com.quanlychitieunhom.Uitls.StateUtil;
 import com.quanlychitieunhom.Uitls.ViewModel.NhomViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,26 +64,20 @@ public class ChiFragment extends Fragment {
 
     private String BASE_URL = "http://10.0.2.2:8080/api/chi/";
     private String token;
+    private String refreshToken;
     private int nhomId;
+    private CreateChiViewModel createChiViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_chi, container, false);
 
-        etSoTienChi = view.findViewById(R.id.et_so_tien_chi);
-        etNgayChi = view.findViewById(R.id.et_ngay_chi);
-        etGhiChuChi = view.findViewById(R.id.et_ghi_chu_chi);
-        btnSoTienChi = view.findViewById(R.id.btn_so_tien_chi);
-        btnChonNgayChi = view.findViewById(R.id.btn_chon_ngay_chi);
-        ivAnhChi = view.findViewById(R.id.iv_anh_chi);
-        btnLuuChi = view.findViewById(R.id.btn_luu_chi);
+        getControl(view);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", "");
-//        nhomId = sharedPreferences.getInt("nhomId", 1); // Default to 1 if not found
-        NhomViewModel nhomViewModel = new ViewModelProvider(requireActivity()).get(NhomViewModel.class);
-        nhomId = nhomViewModel.getNhomID().getValue();
+        getTokenAndRefreshToken();
+
+        getNhomID();
 
         btnSoTienChi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +105,84 @@ public class ChiFragment extends Fragment {
         btnLuuChi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveData();
+//                saveData();
+                createChi();
             }
         });
 
         return view;
+    }
+
+    private void getControl(View view) {
+        etSoTienChi = view.findViewById(R.id.et_so_tien_chi);
+        etNgayChi = view.findViewById(R.id.et_ngay_chi);
+        etGhiChuChi = view.findViewById(R.id.et_ghi_chu_chi);
+        btnSoTienChi = view.findViewById(R.id.btn_so_tien_chi);
+        btnChonNgayChi = view.findViewById(R.id.btn_chon_ngay_chi);
+        ivAnhChi = view.findViewById(R.id.iv_anh_chi);
+        btnLuuChi = view.findViewById(R.id.btn_luu_chi);
+    }
+
+    private void getNhomID() {
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("dataNhom", MODE_PRIVATE);
+        nhomId = sharedPreferences.getInt("nhomID", -1); // Default to 1 if not found
+        Log.d("QuyId thu", String.valueOf(nhomId));
+    }
+
+    private void getTokenAndRefreshToken() {
+        token = SharedReferenceUtils.getAccessToken(requireContext());
+        refreshToken = SharedReferenceUtils.getRefreshToken(requireContext());
+    }
+
+    private void createChi() {
+        try {
+            createChiViewModel = new ViewModelProvider(requireActivity()).get(CreateChiViewModel.class);
+            createChiViewModel.createChi(createChiModel(), refreshToken, token, requireContext());
+            createChiViewModel.getChiViewStateMutableLiveData().observe(getViewLifecycleOwner(), thuModel -> {
+                if(thuModel.getState() == StateUtil.SUCCESS) {
+                    showDialog("Thành công", "Tạo chi thành công");
+                } else if (thuModel.getState() == StateUtil.ERROR){
+                    showDialog("Thất bại", "Tạo chi thất bại");
+                } else {
+                    Toast.makeText(requireContext(), "Đang xử lý...", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (ParseException e) {
+            showDialog("Lỗi", e.getMessage());
+            Log.d("Error parse ngayChi", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private ChiModel createChiModel() throws ParseException {
+        if(checkInput()) {
+            String soTien = etSoTienChi.getText().toString();
+            String ngayChi = etNgayChi.getText().toString();
+            String ghiChu = etGhiChuChi.getText().toString();
+            return new ChiModel(nhomId, Integer.parseInt(soTien), ngayChi, ghiChu);
+        }
+        return null;
+    }
+
+    private boolean checkInput() {
+        String soTien = etSoTienChi.getText().toString();
+        String ngayChi = etNgayChi.getText().toString();
+        String ghiChu = etGhiChuChi.getText().toString();
+
+        return !soTien.isEmpty() && !ngayChi.isEmpty() && !ghiChu.isEmpty();
+    }
+
+    private void showDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
     private void showDatePickerDialog() {
@@ -117,7 +195,7 @@ public class ChiFragment extends Fragment {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        String selectedDate = String.format("%d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
                         etNgayChi.setText(selectedDate);
                     }
                 }, year, month, day);

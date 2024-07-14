@@ -1,25 +1,23 @@
-package com.quanlychitieunhom.Fund.UI.State;
-
-import java.util.Date;
+package com.quanlychitieunhom.CreateChi.UI.State;
 
 public class ChiModel {
-    private int id;
     private int soTien;
     private String ngayChi;
     private String moTa;
+    private int nhomId;
 
     public ChiModel(int id,
                     int soTien,
                     String ngayChi,
                     String moTa) {
-        this.id = id;
+        this.nhomId = id;
         this.soTien = soTien;
         this.ngayChi = ngayChi;
         this.moTa = moTa;
     }
 
-    public int getId() {
-        return id;
+    public int getNhomId() {
+        return nhomId;
     }
 
     public int getSoTien() {

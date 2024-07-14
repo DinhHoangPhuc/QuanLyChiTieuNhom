@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.quanlychitieunhom.CreateFund.UI.Display.TaoQuy;
-import com.quanlychitieunhom.Fund.UI.State.ChiModel;
+import com.quanlychitieunhom.CreateChi.UI.State.ChiModel;
 import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 import com.quanlychitieunhom.Fund.UI.State.QuyModel;
 import com.quanlychitieunhom.Fund.UI.State.QuyState;
@@ -186,7 +186,7 @@ public class QuyFragment extends Fragment {
         if(quyModel.getThus() != null) {
             List<ChiModel> chiList = quyModel.getChis();
             chiList.stream().forEach(chiModel -> {
-                chiArrayList.add(new ChiModel(chiModel.getId(), chiModel.getSoTien(), chiModel.getNgayChi(), chiModel.getMoTa()));
+                chiArrayList.add(new ChiModel(chiModel.getNhomId(), chiModel.getSoTien(), chiModel.getNgayChi(), chiModel.getMoTa()));
             });
         }
     }

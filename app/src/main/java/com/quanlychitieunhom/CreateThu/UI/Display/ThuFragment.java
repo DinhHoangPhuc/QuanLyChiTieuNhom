@@ -155,9 +155,6 @@ public class ThuFragment extends Fragment {
             String soTien = etSoTien.getText().toString();
             String ngayThu = etNgayThu.getText().toString();
             String ghiChu = etGhiChu.getText().toString();
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//            Date dateNgayThu = formatter.parse(ngayThu);
-//            Log.d("Ngay thu", dateNgayThu.toString());
             return new ThuModel(nhomId, Integer.parseInt(soTien), ghiChu, ngayThu);
         }
         return null;

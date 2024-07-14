@@ -2,6 +2,7 @@ package com.quanlychitieunhom.RetrofitSingleton;
 
 import android.content.Context;
 
+import com.quanlychitieunhom.CreateChi.Data.Repository.CreateChiApiCall;
 import com.quanlychitieunhom.CreateFund.Data.Repository.CreateFundApiCall;
 import com.quanlychitieunhom.CreateThu.Data.Repository.CreateThuApiCall;
 import com.quanlychitieunhom.GroupList.Data.Repository.GroupListApiCall;
@@ -47,6 +48,13 @@ public class RetrofitClient {
                                                        String token,
                                                        Context context) {
         return getInstance(refreshTokenCallback, refreshToken, token, context).create(CreateThuApiCall.class);
+    }
+
+    public static CreateChiApiCall getCreateChiApiCall(RefreshTokenCallback refreshTokenCallback,
+                                                       String refreshToken,
+                                                       String token,
+                                                       Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(CreateChiApiCall.class);
     }
 
     public static Retrofit getInstance(RefreshTokenCallback refreshTokenCallback,

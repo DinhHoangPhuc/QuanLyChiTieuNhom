@@ -1,5 +1,6 @@
 package com.quanlychitieunhom.Fund.UI.State;
 
+import com.quanlychitieunhom.CreateChi.UI.State.ChiModel;
 import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 
 import java.util.List;

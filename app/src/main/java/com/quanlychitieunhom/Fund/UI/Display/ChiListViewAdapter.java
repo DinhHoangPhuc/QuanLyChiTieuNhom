@@ -6,10 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.quanlychitieunhom.Fund.UI.State.ChiModel;
+import com.quanlychitieunhom.CreateChi.UI.State.ChiModel;
 import com.quanlychitieunhom.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ChiListViewAdapter extends BaseAdapter {
