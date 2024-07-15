@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.quanlychitieunhom.GroupList.UI.State.GroupListViewModel;
 import com.quanlychitieunhom.GroupList.UI.State.ListNhomModel;
 import com.quanlychitieunhom.GroupList.UI.State.NhomModel;
 import com.quanlychitieunhom.Fund.UI.Display.QuyFragment;
+import com.quanlychitieunhom.CreateGroup.UI.Display.TaoNhom;
 import com.quanlychitieunhom.Login.UI.Display.DangNhap;
 import com.quanlychitieunhom.R;
 
@@ -35,6 +37,7 @@ public class DanhSachNhom extends Fragment {
     private ListView lvNhom;
     private TextView username, chucVu;
     private Button taoNhom, thamGiaNhom;
+    private ImageView avatar;
     private ArrayList<NhomModel> lsNhom = new ArrayList<>();
     private CustomAdapterDanhSachNhom customAdapterDanhSachNhom;
 
@@ -65,6 +68,8 @@ public class DanhSachNhom extends Fragment {
 
         setEventOnListView();
 
+        setEventOnTaoNhom();
+
         return view;
     }
 
@@ -74,6 +79,11 @@ public class DanhSachNhom extends Fragment {
         thamGiaNhom = view.findViewById(R.id.btn_ThamGiaNhom);
         username = view.findViewById(R.id.tvUserName);
         chucVu = view.findViewById(R.id.tvChucVu);
+        avatar = view.findViewById(R.id.imgAvatar);
+    }
+
+    private void setAvatar() {
+
     }
 
     private void getSharedPref() {
@@ -125,6 +135,16 @@ public class DanhSachNhom extends Fragment {
                     .getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new QuyFragment(nhomModel.getId()))
+                    .commit();
+        });
+    }
+
+    private void setEventOnTaoNhom() {
+        taoNhom.setOnClickListener(v -> {
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new TaoNhom())
                     .commit();
         });
     }

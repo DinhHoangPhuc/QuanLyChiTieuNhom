@@ -1,4 +1,4 @@
-package com.quanlychitieunhom.Home;
+package com.quanlychitieunhom.CreateGroup.UI.Display;
 
 
 import static android.content.ContentValues.TAG;
@@ -6,9 +6,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -30,7 +32,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.loader.content.CursorLoader;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,7 +44,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.quanlychitieunhom.CreateGroup.UI.State.CreateGroupModel;
+import com.quanlychitieunhom.CreateGroup.UI.State.CreateGroupViewModel;
 import com.quanlychitieunhom.R;
+import com.quanlychitieunhom.Uitls.SharedReferenceUtils;
+import com.quanlychitieunhom.Uitls.StateUtil;
 
 import org.json.JSONObject;
 
@@ -49,28 +59,25 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class TaoNhom extends Fragment {
-
-    Button btnDy1;
-    EditText edtIp;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
     private static final int MY_REQUEST_CODE = 10;
 
     private ImageView imgAvatar;
-    EditText edtTenNhom, edtMoTa;
-    Button btnTaiAnh;
+    private EditText edtTenNhom, edtMoTa;
+    private Button btnTaiAnh;
+    private ImageButton btnTaoNhom;
+    private Uri mUri;
 
-    ImageButton btnTaoNhom;
-    Uri mUri;
-    String urlTaoNhom = "http://192.168.1.10:8080/api/nhom/taoNhom";
-    String token;
-    String username;
+    private String urlTaoNhom = "http://192.168.1.10:8080/api/nhom/taoNhom";
+    private  String token;
+    private String refreshToken;
+    private String username;
+    private String imgaePath;
+    private CreateGroupViewModel createGroupViewModel;
+
     private ActivityResultLauncher<Intent> mActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -84,71 +91,155 @@ public class TaoNhom extends Fragment {
                         }
                         Uri uri = data.getData();
                         mUri = uri;
-                        try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-                            imgAvatar.setImageBitmap(bitmap);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+
+                        imgaePath = getRealPathFromURI(uri);
+
+                        setAvatar(imgaePath);
                     }
 
                 }
             }
     );
+
     public TaoNhom() {
         // Required empty public constructor
-    }
-
-    public static TaoNhom newInstance(String param1, String param2) {
-        TaoNhom fragment = new TaoNhom();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", MODE_PRIVATE);
-        token = sharedPreferences.getString("token", "");
-        username = sharedPreferences.getString("username", "");
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view =  inflater.inflate(R.layout.layout_sheet_taonhom, container, false);
+
+        getControl(view);
+
+        getTokenAndRefreshTokenAndUsername();
+
+        createGroupViewModel = new ViewModelProvider(this).get(CreateGroupViewModel.class);
+
+        handleTaiAnh();
+
+        handleTaoNhom();
+
+        return view;
+    }
+
+    private void handleTaoNhom() {
+        btnTaoNhom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createGroup();
+//                if (mUri == null) {
+//                    showDialog("Thông báo", "Vui lòng chọn ảnh");
+//                    return;
+//                }
+//                submitThemNhom();
+            }
+        });
+    }
+
+    private void handleTaiAnh() {
+        btnTaiAnh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+    }
+
+    private void createGroup() {
+        if(getCreateGroupModel() != null) {
+            createGroupViewModel.createGroup(getCreateGroupModel(), refreshToken, token, requireContext());
+            createGroupViewModel.getCreateGroupState().observe(getViewLifecycleOwner(), createGroupModel -> {
+                if(createGroupModel.getStateUtil() == StateUtil.SUCCESS) {
+                    showDialog("Thông báo", "Tạo nhóm thành công");
+                } else {
+                    showDialog("Thông báo", "Tạo nhóm thất bại");
+                }
+            });
+        } else {
+            showDialog("Thông báo", "Vui lòng nhập đầy đủ thông tin");
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(requireContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        assert cursor != null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+    private void setAvatar(String imageUrl) {
+        Glide.with(this)
+                .load(imageUrl)
+                .into(imgAvatar);
+    }
+
+    private CreateGroupModel getCreateGroupModel() {
+        if (!validateInput()) {
+            return null;
+        }
+        String tenNhom = edtTenNhom.getText().toString();
+        String moTa = edtMoTa.getText().toString();
+        return new CreateGroupModel(username, tenNhom, moTa, imgaePath);
+    }
+
+    private boolean validateInput() {
+        checkInput();
+        if(edtTenNhom.getError() != null || edtMoTa.getError() != null || mUri == null) {
+            return false;
+        }
+        return true;
+    }
+
+    private void checkInput() {
+        if (edtTenNhom.getText().toString().isEmpty()) {
+            edtTenNhom.setError("Vui lòng nhập tên nhóm");
+        }
+        if (edtMoTa.getText().toString().isEmpty()) {
+            edtMoTa.setError("Vui lòng nhập mô tả");
+        }
+        if (mUri == null) {
+            showDialog("Thông báo", "Vui lòng chọn ảnh");
+        }
+    }
+
+    private void getControl(View view) {
         btnTaiAnh = view.findViewById(R.id.btnChonHinhNen);
         imgAvatar = view.findViewById(R.id.imgAnhNhom);
         btnTaoNhom = view.findViewById(R.id.btnTaoNhom);
         edtTenNhom = view.findViewById(R.id.edtTenNhom);
         edtMoTa = view.findViewById(R.id.edtMoTa);
-        btnTaiAnh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRequestPermission();
-            }
-        });
-        btnTaoNhom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mUri == null) {
-                    Toast.makeText(getActivity(), "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                submitThemNhom();
-            }
-        });
-
-
-        return view;
     }
+
+    private void showDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    private void getTokenAndRefreshTokenAndUsername() {
+        token = SharedReferenceUtils.getAccessToken(requireContext());
+        refreshToken = SharedReferenceUtils.getRefreshToken(requireContext());
+        username = SharedReferenceUtils.getUserName(requireContext());
+    }
+
     private void submitThemNhom() {
 //        String username = "test_user1";
         String tenNhom = edtTenNhom.getText().toString();
@@ -218,28 +309,6 @@ public class TaoNhom extends Fragment {
             }
         };
         requestQueue.add(jsonObjectRequest);
-    }
-
-    private void onClickRequestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (getActivity().checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                String[] permissions = {android.Manifest.permission.READ_EXTERNAL_STORAGE};
-                requestPermissions(permissions, MY_REQUEST_CODE);
-            } else {
-                openGallery();
-            }
-        } else {
-            openGallery();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode != MY_REQUEST_CODE) {
-            openGallery();
-        }
-
     }
 
     private void openGallery() {

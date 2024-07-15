@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.quanlychitieunhom.CreateChi.Data.Repository.CreateChiApiCall;
 import com.quanlychitieunhom.CreateFund.Data.Repository.CreateFundApiCall;
+import com.quanlychitieunhom.CreateGroup.Data.Repository.CreateGroupApiCall;
 import com.quanlychitieunhom.CreateThu.Data.Repository.CreateThuApiCall;
 import com.quanlychitieunhom.GroupList.Data.Repository.GroupListApiCall;
 import com.quanlychitieunhom.Fund.Data.Repository.QuyApiCall;
@@ -71,6 +72,13 @@ public class RetrofitClient {
                                                                    String token,
                                                                    Context context) {
         return getInstance(refreshTokenCallback, refreshToken, token, context).create(ThongKeChiThangApiCall.class);
+    }
+
+    public static CreateGroupApiCall getCreateGroupApiCall(RefreshTokenCallback refreshTokenCallback,
+                                                           String refreshToken,
+                                                           String token,
+                                                           Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(CreateGroupApiCall.class);
     }
 
     public static Retrofit getInstance(RefreshTokenCallback refreshTokenCallback,

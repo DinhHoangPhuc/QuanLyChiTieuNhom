@@ -13,4 +13,9 @@ public class SharedReferenceUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         return sharedPreferences.getString("refreshToken", "");
     }
+
+    public static String getUserName(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("username", "");
+    }
 }
