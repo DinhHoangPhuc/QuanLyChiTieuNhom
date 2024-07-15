@@ -57,7 +57,7 @@ public class TokenAuthenticator implements Authenticator {
                             .build();
                 }
             } else {
-                deleteToken();
+//                deleteToken();
                 startLoginActivity();
                 return null;
             }
