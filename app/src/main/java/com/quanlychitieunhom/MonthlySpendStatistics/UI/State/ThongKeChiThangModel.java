@@ -1,13 +1,13 @@
-package com.quanlychitieunhom.Home;
+package com.quanlychitieunhom.MonthlySpendStatistics.UI.State;
 
-public class ThongKeChiThang {
+public class ThongKeChiThangModel {
     private int tuan;
     private int tongChi;
 
-    public ThongKeChiThang() {
+    public ThongKeChiThangModel() {
     }
 
-    public ThongKeChiThang(int tuan, int tongChi) {
+    public ThongKeChiThangModel(int tuan, int tongChi) {
             this.tuan = tuan;
             this.tongChi = tongChi;
     }

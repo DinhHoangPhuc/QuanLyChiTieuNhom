@@ -26,7 +26,7 @@ import com.quanlychitieunhom.Home.FragNotice;
 import com.quanlychitieunhom.Home.HoanTienFragment;
 import com.quanlychitieunhom.Home.TVMDongFragment;
 import com.quanlychitieunhom.WeeklySpendStatistics.UI.Display.ThongKeChiTuanActivity;
-import com.quanlychitieunhom.Home.ThongkeChiThangFragment;
+import com.quanlychitieunhom.MonthlySpendStatistics.UI.Display.ThongkeChiThangFragment;
 import com.quanlychitieunhom.CreateThu.UI.Display.ThuFragment;
 import com.quanlychitieunhom.Login.UI.Display.DangNhap;
 import com.quanlychitieunhom.R;
