@@ -1,8 +1,14 @@
 package com.quanlychitieunhom.Register.UI.Display;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,13 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.loader.content.CursorLoader;
 
+import com.bumptech.glide.Glide;
 import com.quanlychitieunhom.Login.UI.Display.DangNhap;
 import com.quanlychitieunhom.R;
 import com.quanlychitieunhom.Register.UI.State.RegisterIntent;
@@ -42,8 +54,30 @@ public class DangKy extends AppCompatActivity {
     ProgressBar progressBar;
 
     String imagePath;
-
     RegisterViewModel registrationViewModel;
+    private Uri mUri;
+    private ActivityResultLauncher<Intent> mActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult o) {
+                    Log.e(TAG, "onActivityResult");
+                    if (o.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = o.getData();
+                        if (data == null) {
+                            return;
+                        }
+                        Uri uri = data.getData();
+                        mUri = uri;
+
+                        imagePath = getRealPathFromURI(uri);
+
+                        setAvatar(imagePath);
+                    }
+
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +95,7 @@ public class DangKy extends AppCompatActivity {
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(intent, 100);
+                openGallery();
             }
         });
 
@@ -76,10 +107,8 @@ public class DangKy extends AppCompatActivity {
         registrationViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         registrationViewModel.getRegistrationModel().observe(this, viewState -> {
             if(viewState.getRegisterState() == RegisterState.SENDING) {
-//                Toast.makeText(this, "Sending", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.VISIBLE);
             } else if(viewState.getRegisterState() == RegisterState.SUCCESS) {
-//                Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 showSuccessDialog();
                 Intent intent = new Intent(DangKy.this, DangNhap.class);
@@ -87,11 +116,8 @@ public class DangKy extends AppCompatActivity {
             } else if(viewState.getRegisterState() == RegisterState.ERROR) {
                 progressBar.setVisibility(View.GONE);
                 showErrorMessageDialog("Lỗi server");
-//                Toast.makeText(this, viewState.getRepsonseObject(), Toast.LENGTH_LONG).show();
             } else if(viewState.getRegisterState() == RegisterState.ERROR_VALIDATION) {
                 progressBar.setVisibility(View.GONE);
-//                Toast.makeText(this, "Validation Error", Toast.LENGTH_SHORT).show();
-//                showValidationErrorDialog(viewState.getRepsonseObject());
                 setErrorOnEditText(viewState.getRepsonseObject());
             }
         });
@@ -134,6 +160,30 @@ public class DangKy extends AppCompatActivity {
         edtTenDangNhap.setError(errors.getOrDefault("username", null));
     }
 
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        mActivityLauncher.launch(Intent.createChooser(intent, "Chọn ảnh"));
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(this, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+    private void setAvatar(String imageUrl) {
+        Glide.with(this)
+                .load(imageUrl)
+                .into(imgAvatar);
+    }
+
     private void showValidationErrorDialog(Map<String, String> errors) {
         StringBuilder errorMessage = new StringBuilder();
         for (Map.Entry<String, String> entry : errors.entrySet()) {
@@ -163,16 +213,16 @@ public class DangKy extends AppCompatActivity {
                 .show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 100) {
-            Uri imageUri = data.getData();
-            imgAvatar.setImageURI(imageUri);
-            assert imageUri != null;
-            imagePath = imageUri.getPath();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == 100) {
+//            Uri imageUri = data.getData();
+//            imgAvatar.setImageURI(imageUri);
+//            assert imageUri != null;
+//            imagePath = imageUri.getPath();
+//        }
+//    }
 
     void getControl(){
         edtHoTen = findViewById(R.id.edtFullName);
