@@ -25,12 +25,12 @@ import com.quanlychitieunhom.Home.FragInvite_QR;
 import com.quanlychitieunhom.Home.FragNotice;
 import com.quanlychitieunhom.Home.HoanTienFragment;
 import com.quanlychitieunhom.Home.TVMDongFragment;
-import com.quanlychitieunhom.Home.ThongKe;
+import com.quanlychitieunhom.WeeklySpendStatistics.UI.Display.ThongKeChiTuanActivity;
 import com.quanlychitieunhom.Home.ThongkeChiThangFragment;
 import com.quanlychitieunhom.CreateThu.UI.Display.ThuFragment;
 import com.quanlychitieunhom.Login.UI.Display.DangNhap;
 import com.quanlychitieunhom.R;
-import com.quanlychitieunhom.Uitls.ViewModel.NhomViewModel;
+import com.quanlychitieunhom.Uitls.NhomViewModel;
 
 public class TrangChu extends AppCompatActivity {
     FrameLayout frameLayout;
@@ -65,7 +65,7 @@ public class TrangChu extends AppCompatActivity {
             } else if (item.getItemId() == R.id.Home) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DanhSachNhom()).commit();
             } else if (item.getItemId() == R.id.ThongKeChiTuan) {
-                Intent intent = new Intent(TrangChu.this, ThongKe.class);
+                Intent intent = new Intent(TrangChu.this, ThongKeChiTuanActivity.class);
                 startActivity(intent);
             } else if (item.getItemId() == R.id.ThongKeChiThang) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ThongkeChiThangFragment()).commit();

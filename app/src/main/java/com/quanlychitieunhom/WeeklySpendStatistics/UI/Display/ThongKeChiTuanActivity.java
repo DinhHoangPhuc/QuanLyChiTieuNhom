@@ -1,14 +1,18 @@
-package com.quanlychitieunhom.Home;
+package com.quanlychitieunhom.WeeklySpendStatistics.UI.Display;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,6 +29,10 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.quanlychitieunhom.R;
+import com.quanlychitieunhom.Uitls.SharedReferenceUtils;
+import com.quanlychitieunhom.Uitls.StateUtil;
+import com.quanlychitieunhom.WeeklySpendStatistics.UI.State.ThongKeChiTuanModel;
+import com.quanlychitieunhom.WeeklySpendStatistics.UI.State.ThongKeChiTuanViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,12 +42,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThongKe extends AppCompatActivity {
+public class ThongKeChiTuanActivity extends AppCompatActivity {
 
-    BarChart barChart;
-    ArrayList<BarEntry> entries = new ArrayList<>();
+    private BarChart barChart;
+    private ArrayList<BarEntry> entries = new ArrayList<>();
+    private ArrayList<ThongKeChiTuanModel> thongKeChiTuans = new ArrayList<>();
 
-    ArrayList<ThongKeChiTuan> thongKeChiTuans = new ArrayList<>();
+    private String token, refreshToken;
+    private int quyId;
+    private ThongKeChiTuanViewModel thongKeChiTuanViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,20 +65,83 @@ public class ThongKe extends AppCompatActivity {
 
         getControl();
 
+        getTokenAndRefreshToken();
+
+        getNhomID();
+
+        getThongKeChiTuan();
+
         //goi api
-        try {
-            callApi();
-        } catch (InterruptedException e) {
-            Toast.makeText(ThongKe.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+//        try {
+//            callApi();
+//        } catch (InterruptedException e) {
+//            Toast.makeText(ThongKeChiTuanActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
+    }
+
+    private void getNhomID() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("dataNhom", MODE_PRIVATE);
+        quyId = sharedPreferences.getInt("nhomID", -1); // Default to 1 if not found
+        Log.d("QuyId thu", String.valueOf(quyId));
+    }
+
+    private void getTokenAndRefreshToken() {
+        token = SharedReferenceUtils.getAccessToken(this);
+        refreshToken = SharedReferenceUtils.getRefreshToken(this);
+    }
+
+    private void getThongKeChiTuan() {
+        thongKeChiTuanViewModel = new ViewModelProvider(this).get(ThongKeChiTuanViewModel.class);
+        thongKeChiTuanViewModel.getThongKeChiTuan(quyId, token, refreshToken, this);
+        thongKeChiTuanViewModel.getThongKeChiTuanLiveData().observe(this, thongKeChiTuanModels -> {
+            if (thongKeChiTuanModels.getStateUtil() == StateUtil.SUCCESS) {
+                thongKeChiTuans.addAll(thongKeChiTuanModels.getData());
+                for (int i = 0; i < thongKeChiTuans.size(); i++) {
+                    entries.add(new BarEntry((float) i, (float) thongKeChiTuans.get(i).getSoTien()));
+                }
+
+                BarDataSet dataSet = new BarDataSet(entries, "Thống kê chi tiêu tuần");
+                BarData barData = new BarData(dataSet);
+                barChart.setData(barData);
+
+                ValueFormatter formatter = new ValueFormatter() {
+                    @Override
+                    public String getAxisLabel(float value, AxisBase axis) {
+                        return thongKeChiTuans.get((int) value).getNgayChi();
+                    }
+                };
+
+                XAxis xAxis = barChart.getXAxis();
+                xAxis.setGranularity(1f);
+                xAxis.setGranularityEnabled(true);
+                xAxis.setValueFormatter(formatter);
+
+                barChart.invalidate();
+            } else if (thongKeChiTuanModels.getStateUtil() == StateUtil.ERROR){
+                showDialog("Lỗi", "Không thể lấy dữ liệu");
+            }
+        });
+    }
+
+    private void showDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
     void callApi() throws InterruptedException {
         String url = "http://10.0.2.2:8080/api/chi/thongKeChiTuan?nhomId=4";
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", "");
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("dataLogin", MODE_PRIVATE);
+//        String token = sharedPreferences.getString("token", "");
 
         if(!token.isEmpty()){
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
@@ -86,7 +160,7 @@ public class ThongKe extends AppCompatActivity {
                                     int soTien = spending.getInt("soTien");
 
                                     //tạo một đối tượng thongKeChiTuan và thêm vào mảng thongKeChiTuans
-                                    ThongKeChiTuan thongKeChiTuan = new ThongKeChiTuan(ngayChi, soTien);
+                                    ThongKeChiTuanModel thongKeChiTuan = new ThongKeChiTuanModel(ngayChi, soTien);
                                     thongKeChiTuans.add(thongKeChiTuan);
 
                                     //thêm dữ liệu vào biểu đồ

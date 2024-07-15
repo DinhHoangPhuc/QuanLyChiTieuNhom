@@ -41,17 +41,14 @@ import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 import com.quanlychitieunhom.R;
 import com.quanlychitieunhom.Uitls.SharedReferenceUtils;
 import com.quanlychitieunhom.Uitls.StateUtil;
-import com.quanlychitieunhom.Uitls.ViewModel.NhomViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

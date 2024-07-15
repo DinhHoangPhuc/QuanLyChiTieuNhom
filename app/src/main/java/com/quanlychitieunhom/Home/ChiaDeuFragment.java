@@ -23,7 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.quanlychitieunhom.R;
-import com.quanlychitieunhom.Uitls.ViewModel.NhomViewModel;
+import com.quanlychitieunhom.Uitls.NhomViewModel;
 
 import org.json.JSONObject;
 

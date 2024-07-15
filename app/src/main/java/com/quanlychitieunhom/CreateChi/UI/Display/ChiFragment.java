@@ -37,12 +37,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.quanlychitieunhom.CreateChi.UI.State.ChiModel;
 import com.quanlychitieunhom.CreateChi.UI.State.CreateChiViewModel;
-import com.quanlychitieunhom.CreateThu.UI.State.CreateThuViewModel;
-import com.quanlychitieunhom.CreateThu.UI.State.ThuModel;
 import com.quanlychitieunhom.R;
 import com.quanlychitieunhom.Uitls.SharedReferenceUtils;
 import com.quanlychitieunhom.Uitls.StateUtil;
-import com.quanlychitieunhom.Uitls.ViewModel.NhomViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;

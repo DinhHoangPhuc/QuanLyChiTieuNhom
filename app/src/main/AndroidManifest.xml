@@ -54,7 +54,7 @@
             android:name=".Home.TrangChuTruongNhom"
             android:exported="true" />
         <activity
-            android:name=".Home.ThongKe"
+            android:name=".WeeklySpendStatistics.UI.Display.ThongKeChiTuanActivity"
             android:exported="true" />
         <activity
             android:name=".Register.UI.Display.DangKy"

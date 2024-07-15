@@ -1,4 +1,4 @@
-package com.quanlychitieunhom.Uitls.ViewModel;
+package com.quanlychitieunhom.Uitls;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
