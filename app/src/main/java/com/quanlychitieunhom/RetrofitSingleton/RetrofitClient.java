@@ -8,6 +8,7 @@ import com.quanlychitieunhom.CreateGroup.Data.Repository.CreateGroupApiCall;
 import com.quanlychitieunhom.CreateThu.Data.Repository.CreateThuApiCall;
 import com.quanlychitieunhom.GroupList.Data.Repository.GroupListApiCall;
 import com.quanlychitieunhom.Fund.Data.Repository.QuyApiCall;
+import com.quanlychitieunhom.MonthlyCollectStatistics.Data.Repository.ThongKeThuThangApiCall;
 import com.quanlychitieunhom.MonthlySpendStatistics.Data.Repository.ThongKeChiThangApiCall;
 import com.quanlychitieunhom.RefreshToken.JwtInterceptor;
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
@@ -80,6 +81,13 @@ public class RetrofitClient {
                                                                  String token,
                                                                  Context context) {
         return getInstance(refreshTokenCallback, refreshToken, token, context).create(ThongKeThuTuanApiCall.class);
+    }
+
+    public static ThongKeThuThangApiCall getThongKeThuThangApiCall(RefreshTokenCallback refreshTokenCallback,
+                                                                   String refreshToken,
+                                                                   String token,
+                                                                   Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(ThongKeThuThangApiCall.class);
     }
 
     public static CreateGroupApiCall getCreateGroupApiCall(RefreshTokenCallback refreshTokenCallback,
