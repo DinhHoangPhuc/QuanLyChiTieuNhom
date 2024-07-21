@@ -12,6 +12,7 @@ import com.quanlychitieunhom.MonthlySpendStatistics.Data.Repository.ThongKeChiTh
 import com.quanlychitieunhom.RefreshToken.JwtInterceptor;
 import com.quanlychitieunhom.RefreshToken.RefreshTokenCallback;
 import com.quanlychitieunhom.RefreshToken.TokenAuthenticator;
+import com.quanlychitieunhom.WeeklyCollectStatistics.Data.Repository.ThongKeThuTuanApiCall;
 import com.quanlychitieunhom.WeeklySpendStatistics.Data.Repository.ThongKeChiTuanApiCall;
 
 import okhttp3.OkHttpClient;
@@ -72,6 +73,13 @@ public class RetrofitClient {
                                                                    String token,
                                                                    Context context) {
         return getInstance(refreshTokenCallback, refreshToken, token, context).create(ThongKeChiThangApiCall.class);
+    }
+
+    public static ThongKeThuTuanApiCall getThongKeThuTuanApiCall(RefreshTokenCallback refreshTokenCallback,
+                                                                 String refreshToken,
+                                                                 String token,
+                                                                 Context context) {
+        return getInstance(refreshTokenCallback, refreshToken, token, context).create(ThongKeThuTuanApiCall.class);
     }
 
     public static CreateGroupApiCall getCreateGroupApiCall(RefreshTokenCallback refreshTokenCallback,
