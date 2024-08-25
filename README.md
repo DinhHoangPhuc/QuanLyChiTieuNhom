@@ -8,7 +8,7 @@ QuanLyChiTieuNhom is an Android application developed in Java for managing group
 - SharedPreferences for storing and retrieving user session information.
 - Seamless and intuitive user interface using Android's Fragment and Navigation components.
 - Data visualization using MPAndroidChart.
-- Network requests handled by Volley and ZXing for barcode scanning.
+- Network requests handled by Volley.
 - LiveData and ViewModel from Android Architecture Components for managing UI-related data.
 - REST API calls and network operations handled by Retrofit and OkHttp.
 - Efficient image loading and caching using Glide.
