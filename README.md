@@ -1,5 +1,5 @@
 # QuanLyChiTieuNhom
-QuanLyChiTieuNhom is an Android application developed in Java for managing group expenses. [Backend for this project](https://github.com/DinhHoangPhuc/QuanLyChiTieuNhom_backend).
+QuanLyChiTieuNhom is an Android application developed in Java for managing group expenses. [Backend for this project](https://github.com/DinhHoangPhuc/QuanLyChiTieuNhom_backend).\
 ![Demo](demo.gif).
 
 ## Features
@@ -12,8 +12,6 @@ QuanLyChiTieuNhom is an Android application developed in Java for managing group
 - LiveData and ViewModel from Android Architecture Components for managing UI-related data.
 - REST API calls and network operations handled by Retrofit and OkHttp.
 - Efficient image loading and caching using Glide.
-- Unit and instrumentation tests for reliability and performance.
-- Dependency and project configuration management using Gradle.
 
 ## Installation
 
